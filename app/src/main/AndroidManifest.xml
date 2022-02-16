@@ -10,6 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrSmart">
         <activity
+            android:name=".ui.home.activities.SkinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.register.activities.SignUpActivity"
+            android:exported="true"
+            android:theme="@style/Theme.DrSmart.NoActionBar" />
+        <activity
+            android:name=".ui.register.activities.SignInActivity"
+            android:exported="true"
+            android:theme="@style/Theme.DrSmart.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
