@@ -94,15 +94,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
             android:autofillHints="testHint"
             android:background="@drawable/border_edit_text"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/signIn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,9 +121,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progressbar"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

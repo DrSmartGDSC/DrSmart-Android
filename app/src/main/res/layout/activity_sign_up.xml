@@ -7,11 +7,20 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.register.activities.SignInActivity">
 
+    <include
+        android:id="@+id/loading"
+        layout="@layout/progressbar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:scaleType="center"
+        android:scaleType="fitXY"
         android:src="@drawable/signup_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -64,6 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
             app:layout_constraintVertical_bias="0.3" />
 
+
     </LinearLayout>
 
     <TextView
@@ -71,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/oily_skin_layers"
+        android:text="@string/healthy_lung"
         android:textColor="@color/colorPrimary"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -86,7 +87,7 @@
         android:layout_marginTop="16dp"
         android:maxHeight="300dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/skinpic"
+        android:src="@drawable/lungpic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

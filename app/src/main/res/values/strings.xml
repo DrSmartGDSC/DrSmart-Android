@@ -20,4 +20,15 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="skin_disease_diagnose">Skin Disease Diagnose</string>
     <string name="lung_disease_diagnose">Lung Disease Diagnose</string>
+    <string name="oily_skin_layers">OILY SKIN LAYERS</string>
+    <string name="read_about_disease">Read About Disease</string>
+    <string name="find_out_the_disease">Find out The disease</string>
+    <string name="healthy_lung">Healthy Lung</string>
+    <string name="show_me_n_your_skin_to_find_n_the_disease">Show me\nYour skin to find\nThe Disease</string>
+    <string name="upload">Upload</string>
+    <string name="take">Take</string>
+    <string name="you_have_been_diagnosed_nwith">You have been diagnosed\nwith</string>
+    <string name="find_a_doctor">Find a Doctor</string>
+    <string name="more_info">More Info</string>
+    <string name="please_fill_all_fields">Please fill all fields</string>
 </resources>
