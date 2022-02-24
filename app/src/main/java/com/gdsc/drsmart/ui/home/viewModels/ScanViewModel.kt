@@ -1,7 +1,6 @@
 package com.gdsc.drsmart.ui.home.viewModels
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -32,13 +31,13 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
                 response: Response<PredictResponse>
             ) {
                 view.visibility = View.GONE
-                //predictResponse.value = response.body()
-                Log.e("amr", response.body().toString())
+                predictResponse.value = response.body()
+//                Log.e("amr", response.body().toString())
             }
 
             override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Log.e("amr", t.message + "  ")
+//                Log.e("amr", t.message + "  ")
                 Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
             }
         })

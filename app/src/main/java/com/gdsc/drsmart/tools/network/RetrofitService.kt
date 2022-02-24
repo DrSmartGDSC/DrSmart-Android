@@ -54,7 +54,7 @@ interface RetrofitService {
                 .addInterceptor(interceptor).build() // for loging
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://102.185.123.13:5000/")
+                    .baseUrl("https://sdd-api.herokuapp.com/")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

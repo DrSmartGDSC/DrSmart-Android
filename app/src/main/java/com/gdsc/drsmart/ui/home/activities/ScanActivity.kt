@@ -1,18 +1,18 @@
 package com.gdsc.drsmart.ui.home.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.ui.home.repo.ScanRepository
 import com.gdsc.drsmart.ui.home.viewModels.ScanViewModel
 import com.gdsc.drsmart.ui.home.viewModels.factory.ScanViewModelFactory
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_scan_disease.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -38,9 +38,11 @@ class ScanActivity : AppCompatActivity() {
             finish()
         }
         uploadBtn.setOnClickListener {
-            CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this);
+            cropImage.launch(
+                options {
+                    setGuidelines(CropImageView.Guidelines.ON)
+                }
+            )
         }
         viewModel = ViewModelProvider(
             this, ScanViewModelFactory(
@@ -51,20 +53,33 @@ class ScanActivity : AppCompatActivity() {
         )[ScanViewModel::class.java]
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        selectedImage = ""
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            val result = CropImage.getActivityResult(data)
-            if (resultCode == RESULT_OK) {
-                val resultUri: Uri = result.uri
-                selectedImage = resultUri.path!!
-                predict()
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val error = result.error
-            }
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            // use the returned uri
+            val uriContent = result.uriContent
+            val uriFilePath = result.getUriFilePath(this) // optional usage
+            selectedImage = uriFilePath.toString()
+            predict()
+        } else {
+            // an error occurred
+            val exception = result.error
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        selectedImage = ""
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            val result = CropImage.getActivityResult(data)
+//            if (resultCode == RESULT_OK) {
+//                val resultUri: Uri = result.uri
+//                selectedImage = resultUri.path!!
+//                predict()
+//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                val error = result.error
+//            }
+//        }
+//    }
 
     private fun predict() {
         val file = File(selectedImage)
@@ -78,11 +93,11 @@ class ScanActivity : AppCompatActivity() {
             body, type, load
         )
 
-//        viewModel.predictResponse.observe(this) {
-////            if (it.status) {
-//            Toast.makeText(this, it.data.result[0].name + "", Toast.LENGTH_SHORT).show()
-////            }
-//        }
+        viewModel.predictResponse.observe(this) {
+            val i = Intent(this, ResultActivity::class.java)
+            i.putExtra("response", it)
+            startActivity(i)
+        }
     }
 
     private fun uploadImage(): RequestBody? {
