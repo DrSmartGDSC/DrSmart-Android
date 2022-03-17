@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlin.math.roundToInt
 
 
 class ResultAdapter(var context: Context, var data: PredictResponse) :
@@ -47,7 +48,7 @@ class ResultAdapter(var context: Context, var data: PredictResponse) :
         holder.subItem.visibility = if (expanded) View.VISIBLE else View.GONE
         holder.name.text = data.data.result[position].name
         holder.value.text =
-            data.data.result[position].confidence.toFloat().toString().substring(0, 2) + " %"
+            "${data.data.result[position].confidence.roundToInt()} %"
         holder.progress.apply {
             // Set Progress
             progress = data.data.result[position].confidence.toFloat()

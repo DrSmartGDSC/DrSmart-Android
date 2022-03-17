@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/signIn"
+            app:layout_constraintBottom_toTopOf="@+id/patientBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -136,7 +136,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/signUp"
+            android:id="@+id/doctorBtn"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="32dp"

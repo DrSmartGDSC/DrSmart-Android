@@ -25,7 +25,7 @@ class SignInViewModel(private val repository: LoginRepository) : ViewModel() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, "Server error ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }

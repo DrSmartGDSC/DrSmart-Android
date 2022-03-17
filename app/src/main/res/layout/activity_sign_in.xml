@@ -108,7 +108,7 @@
             tools:ignore="LabelFor" />
 
         <Button
-            android:id="@+id/signIn"
+            android:id="@+id/patientBtn"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="32dp"

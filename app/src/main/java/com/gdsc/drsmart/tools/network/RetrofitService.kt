@@ -29,8 +29,6 @@ interface RetrofitService {
     ): Call<LoginResponse>
 
     //    @Headers("Content-Type:application/json")
-
-
     @Headers(
         "Content-Length: 0",
         "Accept: application/json"

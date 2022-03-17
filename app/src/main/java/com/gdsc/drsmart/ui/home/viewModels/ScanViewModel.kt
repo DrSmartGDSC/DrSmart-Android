@@ -31,13 +31,15 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
                 response: Response<PredictResponse>
             ) {
                 view.visibility = View.GONE
-                predictResponse.value = response.body()
-//                Log.e("amr", response.body().toString())
+                if (response.code() == 200) {
+                    predictResponse.value = response.body()
+                } else {
+                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
                 view.visibility = View.GONE
-//                Log.e("amr", t.message + "  ")
                 Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
             }
         })

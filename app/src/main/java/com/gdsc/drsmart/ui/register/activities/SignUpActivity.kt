@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity() {
         backBtn.setOnClickListener { finish() }
 
         //handle signUp in
-        signUp.setOnClickListener {
+        doctorBtn.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
             val fullName = fullNameEditText.text.toString()

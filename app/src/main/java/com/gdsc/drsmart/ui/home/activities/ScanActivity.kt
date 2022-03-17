@@ -23,13 +23,13 @@ import java.io.File
 lateinit var selectedImage: String
 lateinit var viewModel: ScanViewModel
 private val retrofitService = RetrofitService.getInstance()
+var isLung: Boolean = false
 
 class ScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_disease)
-
-        val isLung = intent.getBooleanExtra("isLung", false)
+        isLung = intent.getBooleanExtra("isLung", false)
         if (isLung) {
             stateImage.setImageResource(R.drawable.lungpic2)
             constraint.setBackgroundColor(resources.getColor(R.color.purple))
@@ -66,26 +66,14 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        selectedImage = ""
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            val result = CropImage.getActivityResult(data)
-//            if (resultCode == RESULT_OK) {
-//                val resultUri: Uri = result.uri
-//                selectedImage = resultUri.path!!
-//                predict()
-//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                val error = result.error
-//            }
-//        }
-//    }
-
     private fun predict() {
         val file = File(selectedImage)
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("img", file.name, requestFile)
-        val type = RequestBody.create(MediaType.parse("multipart/form-data"), "0")
+        var type = RequestBody.create(MediaType.parse("multipart/form-data"), "0")
+        if (isLung) {
+            type = RequestBody.create(MediaType.parse("multipart/form-data"), "1")
+        }
 
         viewModel.doPredict(
             this,
@@ -97,6 +85,7 @@ class ScanActivity : AppCompatActivity() {
             val i = Intent(this, ResultActivity::class.java)
             i.putExtra("response", it)
             startActivity(i)
+            finish()
         }
     }
 

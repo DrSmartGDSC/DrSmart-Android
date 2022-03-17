@@ -36,7 +36,7 @@ class SignInActivity : AppCompatActivity() {
 
         backBtn.setOnClickListener { finish() }
         //handle sign in
-        signIn.setOnClickListener {
+        patientBtn.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
@@ -56,10 +56,20 @@ class SignInActivity : AppCompatActivity() {
 
         viewModel.signIn.observe(this, {
             if (it.status) {
-                val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
-                AppReferences.setToken(this, "Bearer " + it.token)
-                AppReferences.setLoginState(this, true);
+                if (!it.user.is_doctor) {
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+                    AppReferences.setToken(this, "Bearer " + it.token)
+                    AppReferences.setLoginState(this, true)
+                } else {
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+                    AppReferences.setToken(this, "Bearer " + it.token)
+                    AppReferences.setDocLoginState(this, true)
+                    Toast.makeText(this, "I'm a doctor ", Toast.LENGTH_SHORT).show()
+                    //TODO("NAVIGATE TO DOCTOR PAGE !")
+                }
+
             } else {
                 Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
             }

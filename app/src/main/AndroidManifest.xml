@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.gdsc.drsmart">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DrSmart">
+        android:theme="@style/Theme.DrSmart"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.register.activities.RegistrationHomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.DrSmart.NoActionBar" />
         <activity
             android:name=".ui.home.activities.ResultActivity"
             android:exported="true" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
-
         <activity
             android:name=".ui.home.activities.ScanActivity"
             android:exported="true" />
@@ -43,7 +49,7 @@
             android:exported="true"
             android:theme="@style/Theme.DrSmart.NoActionBar" />
         <activity
-            android:name=".ui.register.activities.RegistrationHomeActivity"
+            android:name=".ui.register.activities.ChooseRegistrationActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.DrSmart.NoActionBar">
