@@ -13,6 +13,7 @@
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
@@ -39,8 +40,11 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
-
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
     <style name="Theme.DrSmart.NoActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
         <item name="windowActionBar">false</item>

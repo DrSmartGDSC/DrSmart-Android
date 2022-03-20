@@ -2,6 +2,9 @@ package com.gdsc.drsmart.ui.register.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +18,10 @@ import kotlinx.android.synthetic.main.activity_sign_in.emailEditText
 import kotlinx.android.synthetic.main.activity_sign_in.passwordEditText
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
+var isDoc: Boolean = false
+var field_id: Int = 0
+var is_doctor: Int = 0// is doctor == 1 , 0 for user
+
 class SignUpActivity : AppCompatActivity() {
     lateinit var viewModel: SignUpViewModel
     private val retrofitService = RetrofitService.getInstance()
@@ -22,9 +29,15 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         initView()
+        if (isDoc) {
+            is_doctor = 1;
+            helloMessageTxt.text = getString(R.string.hello_dr)
+            initSpinner()
+        }
     }
 
     private fun initView() {
+        isDoc = intent.getBooleanExtra("isDoc", false)
         viewModel = ViewModelProvider(
             this, SignUpViewModelFactory(
                 RegisterRepository(
@@ -34,15 +47,16 @@ class SignUpActivity : AppCompatActivity() {
         )[SignUpViewModel::class.java]
 
         backBtn.setOnClickListener { finish() }
+        helloMessageTxt.text = getString(R.string.hello_dr)
 
         //handle signUp in
-        doctorBtn.setOnClickListener {
+        signUp.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
             val fullName = fullNameEditText.text.toString()
 
             if (email.isNotEmpty()
-                && password.isNotEmpty() && fullName.isNotEmpty()
+                && password.isNotEmpty() && fullName.isNotEmpty() && field_id != 0
             ) {
                 signUp(email, password, fullName)
             } else {
@@ -52,12 +66,57 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    private fun initSpinner() {
+        fieldsSpinner.visibility = View.VISIBLE
+        viewModel.getFields(this, loading)
+        val fields: ArrayList<String> = ArrayList()
+        fields.add("Select your field")
+        fieldsSpinner.setSelection(0)
+        var adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item, fields
+        )
+        fieldsSpinner.adapter = adapter
+        viewModel.fields.observe(this, {
+            if (it.status) {
+                for (i in it.data.fields) {
+                    fields.add(i.name)
+                }
+                adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_spinner_dropdown_item, fields
+                )
+                fieldsSpinner.adapter = adapter
+            }
+        })
+        fieldsSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                if (position != 0) {
+                    field_id = position
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+    }
+
+
     private fun signUp(email: String, password: String, fullName: String) {
         viewModel.signUp(
             this,
             email,
             password,
             fullName,
+            is_doctor,
+            field_id,
             loading
         )
         viewModel.signUp.observe(this, {

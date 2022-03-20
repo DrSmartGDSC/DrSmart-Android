@@ -35,4 +35,18 @@
     <string name="patient">PATIENT</string>
     <string name="doctor">DOCTOR</string>
     <string name="please_choose_who_you_are">Please Choose Who You Are</string>
+    <string name="hello_dr">Hello Dr !</string>
+    <string name="no_comments">No comments</string>
+    <string name="answer_question">Answer question...</string>
+    <string name="questions">Questions</string>
+    <string name="server_error">server_error</string>
+    <string name="solved_question">Solved Question ?</string>
+    <string name="no">No</string>
+    <string name="solved_question_desc">"Are you sure you want to end this discussion? "</string>
+    <string name="yes">Yes</string>
+    <string name="no_questions">No Question !</string>
+    <string name="my_questions">My questions</string>
+    <string name="start_asking">Start asking doctors using + button below !</string>
+    <string name="explain_condition">Explain Your condition ?</string>
+    <string name="select_photo">Select photo</string>
 </resources>

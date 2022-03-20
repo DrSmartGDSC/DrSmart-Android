@@ -1,10 +1,7 @@
 package com.gdsc.drsmart
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -14,11 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gdsc.drsmart.databinding.ActivityMainBinding
 import com.gdsc.drsmart.tools.storage.AppReferences
-import com.gdsc.drsmart.ui.register.activities.RegistrationHomeActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -42,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_logout), drawerLayout,
+            setOf(R.id.nav_home, R.id.nav_questions, R.id.nav_logout), drawerLayout,
         )
 //        binding.navView.setNavigationItemSelectedListener(this)
         //binding.navView.setNavigationItemSelectedListener(this);
@@ -52,16 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setupWithNavController(navController)
     }
 
-
-    private fun logout() {
-        val i = Intent(this, RegistrationHomeActivity::class.java)
-
-        startActivity(i)
-        finish()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -71,10 +58,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_logout -> Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
-        }
-        return false
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.nav_logout -> Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
+//        }
+//        return false
+//    }
 }

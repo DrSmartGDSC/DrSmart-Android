@@ -26,10 +26,12 @@ class RegistrationHomeActivity : AppCompatActivity() {
 
         signIn.setOnClickListener {
             val i = Intent(this, SignInActivity::class.java)
+            i.putExtra("isDoc", isDoc)
             startActivity(i);
         }
         signUp.setOnClickListener {
             val i = Intent(this, SignUpActivity::class.java)
+            i.putExtra("isDoc", isDoc)
             startActivity(i);
         }
 

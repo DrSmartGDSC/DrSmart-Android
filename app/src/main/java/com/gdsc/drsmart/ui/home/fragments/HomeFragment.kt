@@ -1,4 +1,4 @@
-package com.gdsc.drsmart.ui.home
+package com.gdsc.drsmart.ui.home.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.activities.LungActivity
 import com.gdsc.drsmart.ui.home.activities.SkinActivity
+import com.gdsc.drsmart.ui.home.viewModels.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -19,7 +20,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         view.skinCard.setOnClickListener {

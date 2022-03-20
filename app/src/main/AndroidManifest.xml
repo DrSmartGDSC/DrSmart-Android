@@ -18,6 +18,12 @@
         android:theme="@style/Theme.DrSmart"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.question.QuestionActivity"
+            android:theme="@style/Theme.DrSmart.NoActionBar" />
+        <activity
+            android:name=".ui.doctor.activities.DoctorHomePage"
+            android:exported="true" />
+        <activity
             android:name=".ui.register.activities.RegistrationHomeActivity"
             android:exported="true"
             android:theme="@style/Theme.DrSmart.NoActionBar" />

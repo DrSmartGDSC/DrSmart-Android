@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.gdsc.drsmart.ui.home.HomeFragment"
+        android:name="com.gdsc.drsmart.ui.home.fragments.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
     <activity
@@ -19,6 +19,14 @@
             android:defaultValue="true"
             app:argType="boolean" />
     </activity>
+    <fragment
+        android:id="@+id/nav_questions"
+        android:name="com.gdsc.drsmart.ui.home.fragments.UserQuestionsFragment"
+        android:label="@string/my_questions">
+        <action
+            android:id="@+id/action_nav_questions_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <!--    <fragment-->
     <!--        android:id="@+id/nav_slideshow"-->

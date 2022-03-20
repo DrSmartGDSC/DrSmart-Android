@@ -9,6 +9,7 @@ import com.gdsc.drsmart.MainActivity
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
+import com.gdsc.drsmart.ui.doctor.activities.DoctorHomePage
 import com.gdsc.drsmart.ui.register.repo.LoginRepository
 import com.gdsc.drsmart.ui.register.viewModels.SignInViewModel
 import com.gdsc.drsmart.ui.register.viewModels.factory.SignInViewModelFactory
@@ -58,15 +59,16 @@ class SignInActivity : AppCompatActivity() {
             if (it.status) {
                 if (!it.user.is_doctor) {
                     val i = Intent(this, MainActivity::class.java)
-                    startActivity(i)
                     AppReferences.setToken(this, "Bearer " + it.token)
                     AppReferences.setLoginState(this, true)
-                } else {
-                    val i = Intent(this, MainActivity::class.java)
+                    AppReferences.setDocLoginState(this, false)
                     startActivity(i)
+                } else {
+                    val i = Intent(this, DoctorHomePage::class.java)
                     AppReferences.setToken(this, "Bearer " + it.token)
                     AppReferences.setDocLoginState(this, true)
-                    Toast.makeText(this, "I'm a doctor ", Toast.LENGTH_SHORT).show()
+                    AppReferences.setLoginState(this, false)
+                    startActivity(i)
                     //TODO("NAVIGATE TO DOCTOR PAGE !")
                 }
 

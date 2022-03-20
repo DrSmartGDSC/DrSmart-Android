@@ -1,4 +1,4 @@
-package com.gdsc.drsmart.ui.home
+package com.gdsc.drsmart.ui.home.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
