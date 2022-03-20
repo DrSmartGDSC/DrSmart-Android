@@ -5,4 +5,5 @@
     <color name="colorPrimary">#252427</color>
     <color name="purple">#26264f</color>
     <color name="offwhite">#E0DBDB</color>
+    <color name="light_gray">#f0f0f0</color>
 </resources>
