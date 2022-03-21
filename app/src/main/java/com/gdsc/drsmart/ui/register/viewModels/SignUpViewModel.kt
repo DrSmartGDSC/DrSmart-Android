@@ -40,7 +40,6 @@ class SignUpViewModel(private val repository: RegisterRepository) : ViewModel() 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 view.visibility = View.GONE
                 Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
-
             }
         })
     }
@@ -57,7 +56,6 @@ class SignUpViewModel(private val repository: RegisterRepository) : ViewModel() 
             override fun onFailure(call: Call<FieldsModel>, t: Throwable) {
                 view.visibility = View.GONE
                 Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
-
             }
         })
     }
