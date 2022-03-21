@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/light_gray"
     tools:context=".ui.home.fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,11 +17,12 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/skinCard"
+            android:layout_margin="4dp"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="10dp"
+            app:cardElevation="4dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,8 @@
             android:layout_height="250dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
-            app:cardElevation="10dp"
+            android:layout_margin="4dp"
+            app:cardElevation="4dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintStart_toStartOf="parent"
