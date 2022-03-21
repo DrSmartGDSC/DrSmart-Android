@@ -39,7 +39,6 @@ class ResultAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_diagnosed, parent, false)
 
@@ -48,8 +47,8 @@ class ResultAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mClickListener = moreInfoClick
-
         bind(holder, position)
+
         holder.itemView.setOnClickListener {
             val expanded: Boolean = data.data.result[position].isExpanded
             data.data.result[position].isExpanded = (!expanded)
