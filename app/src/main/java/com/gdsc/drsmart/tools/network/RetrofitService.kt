@@ -2,6 +2,7 @@ package com.gdsc.drsmart.tools.network
 
 import com.gdsc.drsmart.ui.doctor.models.comment.CommentResponse
 import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
+import com.gdsc.drsmart.ui.home.models.InfoModel
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import com.gdsc.drsmart.ui.question.models.AddPostResponse
 import com.gdsc.drsmart.ui.question.models.CreateCommentResponse
@@ -115,6 +116,14 @@ interface RetrofitService {
         @Part("desc") desc: RequestBody,
         @Part("field_id") field_id: RequestBody
     ): Call<AddPostResponse>
+
+
+    @GET("info")
+    fun getInfo(
+        @Header("Authorization") auth: String,
+        @Query("id") id: Int,
+        @Query("type") type: Int
+    ): Call<InfoModel>
 
 
     companion object {

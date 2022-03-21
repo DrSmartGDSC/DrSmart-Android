@@ -9,4 +9,7 @@ class ScanRepository(
 ) {
     fun doPredict(auth: String, img: MultipartBody.Part, type: RequestBody) =
         retrofitService.doPredict(auth, img, type)
+
+    fun getInfo(auth: String, id: Int, fieldId: Int) =
+        retrofitService.getInfo(auth, id, fieldId)
 }

@@ -17,14 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxEms="3"
+            android:maxLength="10"
             android:maxLines="2"
-            android:padding="16dp"
+            android:padding="14dp"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView7"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,16 +58,15 @@
                 android:id="@+id/circularProgressBar"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
                 app:cpb_background_progressbar_color="#b6bbd8"
                 app:cpb_background_progressbar_width="5dp"
                 app:cpb_progress_direction="to_right"
                 app:cpb_progressbar_color="@color/colorPrimary"
                 app:cpb_progressbar_width="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/fullDetails"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -78,7 +80,35 @@
                 app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
                 app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
 
+            <TextView
+                android:id="@+id/fullDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:padding="16dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/circularProgressBar"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="psoriasis" />
 
+            <Button
+                android:id="@+id/moreInfoBtn"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/border_button"
+                android:text="@string/more_info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fullDetails"
+                app:layout_constraintVertical_bias="0.01999998" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

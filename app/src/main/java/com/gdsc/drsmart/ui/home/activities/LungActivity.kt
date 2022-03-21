@@ -16,7 +16,7 @@ class LungActivity : AppCompatActivity() {
         }
         findOutBtn.setOnClickListener {
             val i = Intent(this, ScanActivity::class.java)
-            i.putExtra("isLung", true);
+            i.putExtra("isLung", true)
             startActivity(i);
         }
     }

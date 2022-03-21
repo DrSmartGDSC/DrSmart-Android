@@ -1,14 +1,24 @@
 package com.gdsc.drsmart.ui.home.activities
 
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.gdsc.drsmart.R
+import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.ui.home.adapter.ResultAdapter
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import kotlinx.android.synthetic.main.activity_result.*
+import kotlinx.android.synthetic.main.activity_result.recycleView
+import kotlinx.android.synthetic.main.ask_question_dialog.*
+import kotlinx.android.synthetic.main.fragment_questions.*
+import kotlinx.android.synthetic.main.more_info_dialog.*
 
+private lateinit var dialog: Dialog
 
 class ResultActivity : AppCompatActivity() {
     lateinit var resultsAdapter: ResultAdapter
@@ -20,15 +30,42 @@ class ResultActivity : AppCompatActivity() {
 
     private fun initViews() {
         val response = intent.getSerializableExtra("response") as PredictResponse
+        val type = intent.getIntExtra("type", 0)
         (recycleView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         recycleView.layoutManager = LinearLayoutManager(this)
         resultsAdapter =
-            ResultAdapter(this, response)
-        recycleView.adapter = resultsAdapter
+            ResultAdapter(this, response, object : ResultAdapter.BtnClickListener {
+                override fun onBtnClick(position: Int) {
+                    viewModel.getInfo(
+                        this@ResultActivity,
+                        AppReferences.getToken(this@ResultActivity),
+                        position, type
+                    )
 
+                }
+            })
+
+        recycleView.adapter = resultsAdapter
+        viewModel.infoResponse.observe(this) {
+            if (it.status) {
+                showDialog(this, it.data.result)
+            }
+        }
         close.setOnClickListener {
             finish()
         }
+
+    }
+
+    private fun showDialog(context: Context, txt: String) {
+        dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        val window: Window = dialog.window!!
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog.setContentView(R.layout.more_info_dialog)
+        dialog.desc.text = txt
+        dialog.show()
     }
 
 }
