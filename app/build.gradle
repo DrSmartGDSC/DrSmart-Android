@@ -59,6 +59,9 @@ dependencies {
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //progress bar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 
 
     testImplementation 'junit:junit:'

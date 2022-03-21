@@ -8,6 +8,7 @@ import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.adapter.ResultAdapter
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import kotlinx.android.synthetic.main.activity_result.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class ResultActivity : AppCompatActivity() {
@@ -15,13 +16,20 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        initViews()
+    }
 
+    private fun initViews() {
         val response = intent.getSerializableExtra("response") as PredictResponse
         (recycleView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         recycleView.layoutManager = LinearLayoutManager(this)
         resultsAdapter =
             ResultAdapter(this, response)
         recycleView.adapter = resultsAdapter
+
+        backBtn.setOnClickListener {
+            finish()
+        }
     }
 
 }
