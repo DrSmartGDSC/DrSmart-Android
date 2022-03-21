@@ -27,12 +27,12 @@ class ChooseRegistrationActivity : AppCompatActivity() {
         if (AppReferences.getDocLoginState(this)) {
             val i = Intent(this, DoctorHomePage::class.java)
             startActivity(i)
-            //TODO("ADD FINISH & CHANGE ACTIVITY")
+            finish()
         }
         if (AppReferences.getLoginState(this)) {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
-            //TODO("ADD FINISH & CHANGE ACTIVITY")
+            finish()
         }
     }
 
@@ -41,13 +41,13 @@ class ChooseRegistrationActivity : AppCompatActivity() {
             val i = Intent(this, RegistrationHomeActivity::class.java)
             i.putExtra("isDoctor", true)
             startActivity(i)
-            //TODO("add finish here ")
+            finish()
         }
         patientBtn.setOnClickListener {
             val i = Intent(this, RegistrationHomeActivity::class.java)
             i.putExtra("isDoctor", false)
             startActivity(i)
-            //TODO("add finish here ")
+            finish()
         }
     }
 }

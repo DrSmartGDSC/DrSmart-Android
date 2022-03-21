@@ -69,7 +69,6 @@ class SignInActivity : AppCompatActivity() {
                     AppReferences.setDocLoginState(this, true)
                     AppReferences.setLoginState(this, false)
                     startActivity(i)
-                    //TODO("NAVIGATE TO DOCTOR PAGE !")
                 }
 
             } else {
