@@ -8,7 +8,6 @@ import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.adapter.ResultAdapter
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import kotlinx.android.synthetic.main.activity_result.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class ResultActivity : AppCompatActivity() {
@@ -27,7 +26,7 @@ class ResultActivity : AppCompatActivity() {
             ResultAdapter(this, response)
         recycleView.adapter = resultsAdapter
 
-        backBtn.setOnClickListener {
+        close.setOnClickListener {
             finish()
         }
     }

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
 import com.gdsc.drsmart.ui.question.QuestionActivity
 
@@ -24,6 +25,7 @@ class QuestionAdapter(var context: Context, var data: PostsResponse, private val
         var field: TextView = itemView.findViewById(R.id.fieldTxt)
         var image: ImageView = itemView.findViewById(R.id.postImg)
         var typeAnswer: TextView = itemView.findViewById(R.id.typeAnswer_editText)
+        var profileImage: CircularTextView = itemView.findViewById(R.id.profileImage)
     }
 
 
@@ -57,6 +59,15 @@ class QuestionAdapter(var context: Context, var data: PostsResponse, private val
             i.putExtra("isUser", is_user)
             context.startActivity(i)
         }
+        initProfileImage(holder, position)
+    }
+
+    private fun initProfileImage(holder: ViewHolder, position: Int) {
+        val rand = (CircularTextView.colors.indices).random()
+        holder.profileImage.setStrokeWidth(0)
+        holder.profileImage.setSolidColor(CircularTextView.colors[rand])
+        holder.profileImage.setStrokeColor("#000000")
+        holder.profileImage.text = data.data.posts[position].user_name[0].toString()
     }
 
     override fun getItemViewType(position: Int): Int {

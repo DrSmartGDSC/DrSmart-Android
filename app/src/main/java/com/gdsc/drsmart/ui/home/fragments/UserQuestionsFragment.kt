@@ -20,6 +20,7 @@ import com.canhub.cropper.options
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
+import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.adapter.QuestionAdapter
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
 import com.gdsc.drsmart.ui.doctor.viewModels.PostsViewModel
@@ -239,7 +240,16 @@ class UserQuestionsFragment : Fragment() {
                 ).show()
             }
         }
+        initProfileImage()
         dialog.show()
+    }
+
+    private fun initProfileImage() {
+        val rand = (CircularTextView.colors.indices).random()
+        profileImage.setStrokeWidth(0)
+        dialog.profileImage.setSolidColor(CircularTextView.colors[rand])
+        dialog.profileImage.setStrokeColor("#000000")
+        dialog.profileImage.text = "Ask"
     }
 
     private fun getAddPostResponse() {

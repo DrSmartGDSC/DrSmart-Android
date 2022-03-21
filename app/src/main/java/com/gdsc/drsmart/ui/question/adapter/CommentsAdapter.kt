@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.comment.Data
 
 
@@ -20,11 +21,10 @@ class CommentsAdapter(var context: Context, var data: Data) :
         var name: TextView = itemView.findViewById(R.id.userName)
         var desc: TextView = itemView.findViewById(R.id.commentTxt)
         var image: ImageView = itemView.findViewById(R.id.commentPhoto)
+        var profileImage: CircularTextView = itemView.findViewById(R.id.profileImage)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
         return ViewHolder(view)
@@ -45,6 +45,15 @@ class CommentsAdapter(var context: Context, var data: Data) :
         } else {
             holder.image.visibility = View.GONE
         }
+        initProfileImage(holder, position)
+    }
+
+    private fun initProfileImage(holder: ViewHolder, position: Int) {
+        val rand = (CircularTextView.colors.indices).random()
+        holder.profileImage.setStrokeWidth(0)
+        holder.profileImage.setSolidColor(CircularTextView.colors[rand])
+        holder.profileImage.setStrokeColor("#000000")
+        holder.profileImage.text = data.comments[position].user_name[0].toString()
     }
 
     override fun getItemViewType(position: Int): Int {
