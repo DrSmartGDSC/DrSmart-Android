@@ -100,7 +100,7 @@ class UserQuestionsFragment : Fragment() {
     private fun getResponse(view: View) {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
-                postsAdapter = QuestionAdapter(context!!, it)
+                postsAdapter = QuestionAdapter(context!!, it, true)
                 view.recycleView.adapter = postsAdapter
                 view.noQuestionsView.visibility = View.GONE
             } else {

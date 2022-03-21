@@ -30,6 +30,7 @@ import java.io.File
 
 var selectedImagePath: String = "null"
 var isUploadImage: Boolean = false
+var isUser: Boolean = false
 
 class QuestionActivity : AppCompatActivity() {
     lateinit var viewModel: CommentsViewModel
@@ -61,6 +62,16 @@ class QuestionActivity : AppCompatActivity() {
 
     private fun initView() {
         questionData = intent.getSerializableExtra("question") as Post
+        isUser = intent.getBooleanExtra("isUser", false)
+        Log.e("isUser", "${isUser} || is answered ${questionData.answered}")
+        if (isUser) {
+            if (questionData.answered) {
+                endPost.visibility = View.VISIBLE
+            } else {
+                endPost.visibility = View.GONE
+            }
+            endPost.isEnabled = false
+        }
         Log.e("QuestionID", questionData.post_id.toString())
         initToolbar()
         descTxtView.text = questionData.desc

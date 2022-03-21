@@ -56,28 +56,29 @@
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_profile"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/userNameTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
-                        android:text="Patient"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toStartOf="@+id/endPost"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/imageView8"
-                        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+                        app:layout_constraintTop_toTopOf="@+id/imageView8"
+                        tools:text="Patient" />
 
                     <TextView
                         android:id="@+id/fieldTxt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:textSize="16sp"
+                        android:layout_marginTop="4dp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                         app:layout_constraintEnd_toStartOf="@+id/endPost"
                         app:layout_constraintHorizontal_bias="0.049"
@@ -92,12 +93,15 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fieldTxt"
+                        app:layout_constraintVertical_bias="0.0"
                         tools:text="la bla lal aballbla lablal lballsl lsa lasl lsaldsla d
 dsla dlasdlsadl
 " />
@@ -117,7 +121,8 @@ dsla dlasdlsadl
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descTxtView" />
+                        app:layout_constraintTop_toBottomOf="@+id/descTxtView"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:id="@+id/endPost"
@@ -130,7 +135,8 @@ dsla dlasdlsadl
                         android:src="@drawable/ic_baseline_check_circle_outline_24"
                         app:layout_constraintBottom_toTopOf="@+id/fieldTxt"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+                        app:layout_constraintTop_toTopOf="@+id/imageView8"
+                        tools:ignore="ContentDescription" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -214,8 +220,10 @@ dsla dlasdlsadl
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:autofillHints="true"
         android:background="@drawable/border_edit_text"
         android:hint="@string/answer_question"
+        android:inputType="text"
         android:padding="6dp"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -237,7 +245,8 @@ dsla dlasdlsadl
         android:src="@drawable/ic_baseline_send_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/commentEditText" />
+        app:layout_constraintTop_toTopOf="@+id/commentEditText"
+        tools:ignore="ContentDescription" />
 
     <include
         android:id="@+id/progress"
@@ -276,7 +285,8 @@ dsla dlasdlsadl
         app:layout_constraintBottom_toBottomOf="@+id/sendComment"
         app:layout_constraintEnd_toStartOf="@+id/sendComment"
         app:layout_constraintStart_toEndOf="@+id/commentEditText"
-        app:layout_constraintTop_toTopOf="@+id/sendComment" />
+        app:layout_constraintTop_toTopOf="@+id/sendComment"
+        tools:ignore="ContentDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

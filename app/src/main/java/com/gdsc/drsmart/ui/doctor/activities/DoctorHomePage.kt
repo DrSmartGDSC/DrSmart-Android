@@ -70,7 +70,7 @@ class DoctorHomePage : AppCompatActivity() {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
                 postsAdapter =
-                    QuestionAdapter(this, it)
+                    QuestionAdapter(this, it, false)
                 recycleView.adapter = postsAdapter
                 noPostsView.visibility = View.GONE
 

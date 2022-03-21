@@ -15,7 +15,7 @@ import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
 import com.gdsc.drsmart.ui.question.QuestionActivity
 
 
-class QuestionAdapter(var context: Context, var data: PostsResponse) :
+class QuestionAdapter(var context: Context, var data: PostsResponse, private val is_user: Boolean) :
     RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -54,6 +54,7 @@ class QuestionAdapter(var context: Context, var data: PostsResponse) :
         holder.typeAnswer.setOnClickListener {
             val i = Intent(context, QuestionActivity::class.java)
             i.putExtra("question", data.data.posts[position])
+            i.putExtra("isUser", is_user)
             context.startActivity(i)
         }
     }
