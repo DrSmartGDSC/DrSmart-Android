@@ -34,12 +34,12 @@ class ResultActivity : AppCompatActivity() {
         (recycleView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         recycleView.layoutManager = LinearLayoutManager(this)
         resultsAdapter =
-            ResultAdapter(this, response, object : ResultAdapter.BtnClickListener {
-                override fun onBtnClick(position: Int) {
+            ResultAdapter(this, response, object : ResultAdapter.onMoreInfoClickListner {
+                override fun onClick(id: Int) {
                     viewModel.getInfo(
                         this@ResultActivity,
                         AppReferences.getToken(this@ResultActivity),
-                        position, type
+                        id, type
                     )
 
                 }

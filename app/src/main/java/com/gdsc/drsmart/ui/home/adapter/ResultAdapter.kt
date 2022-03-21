@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 
 class ResultAdapter(
     var context: Context,
-    var data: PredictResponse, val btnlistener: BtnClickListener
+    var data: PredictResponse, val moreInfoClick: onMoreInfoClickListner
 ) :
     RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
 
@@ -31,11 +31,11 @@ class ResultAdapter(
     }
 
     companion object {
-        var mClickListener: BtnClickListener? = null
+        var mClickListener: onMoreInfoClickListner? = null
     }
 
-    interface BtnClickListener {
-        fun onBtnClick(position: Int)
+    interface onMoreInfoClickListner {
+        fun onClick(id: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,7 +47,7 @@ class ResultAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        mClickListener = btnlistener
+        mClickListener = moreInfoClick
 
         bind(holder, position)
         holder.itemView.setOnClickListener {
@@ -58,7 +58,7 @@ class ResultAdapter(
 
         holder.moreInfo.setOnClickListener {
             if (mClickListener != null)
-                mClickListener?.onBtnClick(data.data.result[position].id)
+                mClickListener?.onClick(data.data.result[position].id)
         }
     }
 
