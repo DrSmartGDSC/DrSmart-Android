@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
@@ -76,6 +77,7 @@ class UserQuestionsFragment : Fragment() {
         initAdapter()
         getPosts(view)
         getResponse(view)
+        handleScroll()
         return view
     }
 
@@ -83,6 +85,15 @@ class UserQuestionsFragment : Fragment() {
         view.askQuestion.setOnClickListener {
             showDialog(context!!)
         }
+    }
+
+    private fun handleScroll() {
+        myView.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) myView.askQuestion.hide() else if (dy < 0) myView.askQuestion.show()
+            }
+        })
+
     }
 
     private fun getPosts(view: View) {
