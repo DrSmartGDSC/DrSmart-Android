@@ -77,7 +77,6 @@ class DoctorHomePage : AppCompatActivity() {
             } else {
                 noPostsView.visibility = View.VISIBLE
             }
-
         }
     }
 

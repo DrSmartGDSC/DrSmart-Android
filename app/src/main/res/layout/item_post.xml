@@ -80,21 +80,6 @@
 dsla dlasdlsadl
 " />
 
-            <ImageView
-                android:id="@+id/postImg"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/border_edit_text"
-                android:padding="4dp"
-                android:src="@drawable/chest"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descTxtView" />
-
             <!--            <ImageView-->
             <!--                android:id="@+id/checkPost"-->
             <!--                android:layout_width="50dp"-->
@@ -109,6 +94,21 @@ dsla dlasdlsadl
             <!--                app:layout_constraintStart_toStartOf="parent"-->
             <!--                app:layout_constraintTop_toBottomOf="@+id/postImg"-->
             <!--                app:layout_constraintVertical_bias="0.0" />-->
+
+            <ImageView
+                android:id="@+id/postImg"
+                android:layout_width="0dp"
+                android:layout_height="230dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chest"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descTxtView" />
 
             <TextView
                 android:id="@+id/typeAnswer_editText"
