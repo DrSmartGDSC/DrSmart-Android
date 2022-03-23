@@ -16,6 +16,7 @@ import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.adapter.CommentsAdapter
 import com.gdsc.drsmart.ui.question.repo.CommentRepository
@@ -41,6 +42,7 @@ class QuestionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         initView()
+        initProfileImage()
         initViewModel()
         initAdapter()
         getComments()
@@ -48,6 +50,12 @@ class QuestionActivity : AppCompatActivity() {
         createComment()
         chooseImage()
         endPost()
+    }
+
+    private fun initProfileImage() {
+        profileImage.setSolidColor(CircularTextView.colors[0])
+        profileImage.setStrokeColor("#000000")
+        profileImage.text = questionData.user_name[0].toString()
     }
 
     private fun initViewModel() {
@@ -98,7 +106,7 @@ class QuestionActivity : AppCompatActivity() {
             val uriContent = result.uriContent
             val uriFilePath = result.getUriFilePath(this)
             selectedImagePath = uriFilePath.toString()
-            Log.e("image_path_uri", selectedImagePath)
+            Log.d("image_path_uri", selectedImagePath)
             chooseImage.setImageURI(uriContent)
             chooseImage.isEnabled = false
             isUploadImage = true
@@ -151,7 +159,7 @@ class QuestionActivity : AppCompatActivity() {
         }
         viewModel.endPostResponse.observe(this) {
             if (it.status) {
-                Toast.makeText(this, "Thanks dr !", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.thanks_dr), Toast.LENGTH_SHORT).show()
                 finish()
             } else {
                 Toast.makeText(this, R.string.server_error, Toast.LENGTH_SHORT).show()

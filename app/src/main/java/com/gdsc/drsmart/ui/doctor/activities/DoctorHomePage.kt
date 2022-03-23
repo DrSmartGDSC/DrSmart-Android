@@ -43,7 +43,6 @@ class DoctorHomePage : AppCompatActivity() {
 
         initToolbar()
         initAdapter()
-        getPosts()
         getResponse()
     }
 
@@ -53,12 +52,19 @@ class DoctorHomePage : AppCompatActivity() {
         toolbar.title = getString(R.string.questions)
     }
 
+    override fun onPause() {
+        super.onPause()
+        pageNum = 1
+        isLastPage = false
+        isLoading = false
+    }
+
     override fun onResume() {
         super.onResume()
         pageNum = 1
         isLastPage = false
         isLoading = false
-//        getPosts()
+        getPosts()
     }
 
     private fun initAdapter() {
@@ -91,6 +97,7 @@ class DoctorHomePage : AppCompatActivity() {
     private fun getResponse() {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
+                recycleView.visibility = View.VISIBLE
                 if (pageNum == 1) {
                     postsAdapter = QuestionAdapter(this, it.data.posts, false)
                     recycleView.adapter = postsAdapter
@@ -100,6 +107,7 @@ class DoctorHomePage : AppCompatActivity() {
                 }
                 noPostsView.visibility = View.GONE
             } else if (it.data.posts.isEmpty() && pageNum == 1) {
+                recycleView.visibility = View.GONE
                 noPostsView.visibility = View.VISIBLE
             }
         }
@@ -117,7 +125,7 @@ class DoctorHomePage : AppCompatActivity() {
                 i.putExtra("login_state", true)
                 startActivity(i)
                 finish()
-                true
+                return true
             }
             else -> super.onOptionsItemSelected(item)
         }

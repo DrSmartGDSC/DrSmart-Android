@@ -56,10 +56,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profileImage"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/checkPost"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
@@ -83,20 +82,18 @@
 dsla dlasdlsadl
 " />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/checkPost"-->
-            <!--                android:layout_width="50dp"-->
-            <!--                android:layout_height="50dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="16dp"-->
-            <!--                android:layout_marginBottom="16dp"-->
-            <!--                android:background="@null"-->
-            <!--                android:padding="4dp"-->
-            <!--                android:src="@drawable/ic_baseline_check_circle_outline_24"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/postImg"-->
-            <!--                app:layout_constraintVertical_bias="0.0" />-->
+            <ImageView
+                android:id="@+id/checkPost"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:padding="4dp"
+                android:src="@drawable/ic_baseline_check_circle_outline_24"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/postImg"

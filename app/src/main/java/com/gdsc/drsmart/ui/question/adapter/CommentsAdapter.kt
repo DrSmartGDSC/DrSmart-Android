@@ -2,7 +2,6 @@ package com.gdsc.drsmart.ui.question.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,9 +58,8 @@ class CommentsAdapter(
 //        val rand = (CircularTextView.colors.indices).random()
         holder.profileImage.setStrokeWidth(0)
         // 0 for user 1 for doctor
-        Log.e("amr", "${AppReferences.getUserId(context)}  ${userId}")
         if (isUser) {
-            if (AppReferences.getUserId(context) == userId) {
+            if (AppReferences.getUserId(context) == data.comments[position].user_id.toString()) {
                 holder.profileImage.setSolidColor(CircularTextView.colors[0])
             } else {
                 holder.profileImage.setSolidColor(CircularTextView.colors[1])

@@ -53,4 +53,6 @@
     <string name="have_a_question_ask_a_doctor">Have a question ? ask a doctor !</string>
     <string name="show_me_your_x_ray">Show me your x-ray to find disease</string>
     <string name="start_adding_questions">Start add a question by using add + button</string>
+    <string name="answered_question">Answered Question !</string>
+    <string name="thanks_dr">Thanks dr !</string>
 </resources>

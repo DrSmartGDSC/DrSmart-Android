@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.utils.Base64Utils
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.QuestionActivity
+import com.gdsc.drsmart.ui.question.isUser
 
 
 class QuestionAdapter(
@@ -28,7 +30,7 @@ class QuestionAdapter(
         var desc: TextView = itemView.findViewById(R.id.descTxtView)
         var field: TextView = itemView.findViewById(R.id.fieldTxt)
         var image: ImageView = itemView.findViewById(R.id.postImg)
-        var typeAnswer: TextView = itemView.findViewById(R.id.typeAnswer_editText)
+        var checkPost: ImageView = itemView.findViewById(R.id.checkPost)
         var profileImage: CircularTextView = itemView.findViewById(R.id.profileImage)
     }
 
@@ -57,11 +59,24 @@ class QuestionAdapter(
             holder.image.visibility = View.GONE
         }
 
-        holder.typeAnswer.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val i = Intent(context, QuestionActivity::class.java)
             i.putExtra("question", data[position])
             i.putExtra("isUser", is_user)
             context.startActivity(i)
+        }
+        if (isUser) {
+            if (data[position].answered) {
+                holder.checkPost.visibility = View.VISIBLE
+            }
+            holder.checkPost.setOnClickListener {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.answered_question),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
         initProfileImage(holder, position)
     }
