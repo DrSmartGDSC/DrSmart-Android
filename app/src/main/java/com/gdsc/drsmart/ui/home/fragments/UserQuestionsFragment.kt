@@ -1,5 +1,6 @@
 package com.gdsc.drsmart.ui.home.fragments
 
+import PaginationScrollListener
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -42,6 +43,9 @@ var field_id: Int = 0
 var imagePath: String = "null"
 var isUploadImage: Boolean = false
 lateinit var myView: View
+var pageNum = 1
+var isLastPage: Boolean = false
+var isLoading: Boolean = false
 
 class UserQuestionsFragment : Fragment() {
     private lateinit var dialog: Dialog
@@ -82,6 +86,18 @@ class UserQuestionsFragment : Fragment() {
         return view
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        pageNum = 1
+        isLastPage = false
+        isLoading = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        myView.noQuestionsView.visibility = View.GONE
+    }
+
     private fun initView(view: View) {
         view.askQuestion.setOnClickListener {
             showDialog(context!!)
@@ -98,24 +114,45 @@ class UserQuestionsFragment : Fragment() {
     }
 
     private fun getPosts(view: View) {
+        myView.noQuestionsView.visibility = View.GONE
         viewModel.getPosts(
             context!!, AppReferences.getToken(activity),
-            1, 10000, view.progress
+            pageNum, 10, view.progress
         )
-        //TODO(Add pagination)
     }
 
     private fun initAdapter() {
         myView.recycleView.layoutManager = LinearLayoutManager(context)
+        myView.recycleView.addOnScrollListener(object :
+            PaginationScrollListener(myView.recycleView.layoutManager as LinearLayoutManager) {
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                ++pageNum
+                getPosts(myView)
+            }
+        })
     }
 
     private fun getResponse(view: View) {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
-                postsAdapter = QuestionAdapter(context!!, it, true)
-                view.recycleView.adapter = postsAdapter
+                if (pageNum == 1) {
+                    postsAdapter = QuestionAdapter(context!!, it.data.posts, true)
+                    view.recycleView.adapter = postsAdapter
+                } else {
+                    isLoading = false
+                    postsAdapter.addData(it.data.posts)
+                }
                 view.noQuestionsView.visibility = View.GONE
-            } else {
+            } else if (it.data.posts.isEmpty() && pageNum == 1) {
                 view.noQuestionsView.visibility = View.VISIBLE
             }
         }
@@ -160,6 +197,7 @@ class UserQuestionsFragment : Fragment() {
         }
 
     }
+
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {

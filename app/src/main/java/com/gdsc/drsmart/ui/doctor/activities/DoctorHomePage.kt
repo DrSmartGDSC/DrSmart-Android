@@ -1,5 +1,6 @@
 package com.gdsc.drsmart.ui.doctor.activities
 
+import PaginationScrollListener
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +24,9 @@ import kotlinx.android.synthetic.main.base_toolbar.*
 lateinit var viewModel: PostsViewModel
 lateinit var postsAdapter: QuestionAdapter
 private val retrofitService = RetrofitService.getInstance()
+var pageNum = 1
+var isLastPage: Boolean = false
+var isLoading: Boolean = false
 
 class DoctorHomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,30 +55,51 @@ class DoctorHomePage : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        pageNum = 1
+        isLastPage = false
+        isLoading = false
         getPosts()
     }
 
     private fun initAdapter() {
         recycleView.layoutManager = LinearLayoutManager(this)
+        recycleView.addOnScrollListener(object :
+            PaginationScrollListener(recycleView.layoutManager as LinearLayoutManager) {
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                ++pageNum
+                getPosts()
+            }
+        })
     }
 
     private fun getPosts() {
         viewModel.getPosts(
             this, AppReferences.getToken(this),
-            1, 10000, loading
+            pageNum, 10, loading
         )
-        //TODO(Add pagination)
     }
 
     private fun getResponse() {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
-                postsAdapter =
-                    QuestionAdapter(this, it, false)
-                recycleView.adapter = postsAdapter
+                if (pageNum == 1) {
+                    postsAdapter = QuestionAdapter(this, it.data.posts, true)
+                    recycleView.adapter = postsAdapter
+                } else {
+                    isLoading = false
+                    postsAdapter.addData(it.data.posts)
+                }
                 noPostsView.visibility = View.GONE
-
-            } else {
+            } else if (it.data.posts.isEmpty() && pageNum == 1) {
                 noPostsView.visibility = View.VISIBLE
             }
         }

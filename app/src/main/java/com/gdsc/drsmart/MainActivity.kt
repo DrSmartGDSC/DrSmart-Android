@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         if (isAsk) {
             Toast.makeText(
                 this,
-                "Start add a question by using add + button",
+                getString(R.string.start_adding_questions),
                 Toast.LENGTH_LONG
             ).show()
             navController.navigate(R.id.nav_questions)

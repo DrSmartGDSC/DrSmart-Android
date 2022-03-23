@@ -12,11 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.utils.Base64Utils
 import com.gdsc.drsmart.tools.utils.CircularTextView
-import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
+import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.QuestionActivity
 
 
-class QuestionAdapter(var context: Context, var data: PostsResponse, private val is_user: Boolean) :
+class QuestionAdapter(
+    var context: Context,
+    var data: ArrayList<Post>,
+    private val is_user: Boolean
+) :
     RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,20 +46,20 @@ class QuestionAdapter(var context: Context, var data: PostsResponse, private val
 
     @SuppressLint("SetTextI18n")
     private fun bind(holder: ViewHolder, position: Int) {
-        holder.desc.text = data.data.posts[position].desc
-        holder.field.text = data.data.posts[position].field
-        holder.name.text = data.data.posts[position].user_name
+        holder.desc.text = data[position].desc
+        holder.field.text = data[position].field
+        holder.name.text = data[position].user_name
 
         //convert base64 to image
-        if (data.data.posts[position].img != null) {
-            holder.image.setImageBitmap(Base64Utils.decodeToBitmap(data.data.posts[position].img))
+        if (data[position].img != null) {
+            holder.image.setImageBitmap(Base64Utils.decodeToBitmap(data[position].img))
         } else {
             holder.image.visibility = View.GONE
         }
 
         holder.typeAnswer.setOnClickListener {
             val i = Intent(context, QuestionActivity::class.java)
-            i.putExtra("question", data.data.posts[position])
+            i.putExtra("question", data[position])
             i.putExtra("isUser", is_user)
             context.startActivity(i)
         }
@@ -67,12 +71,19 @@ class QuestionAdapter(var context: Context, var data: PostsResponse, private val
         holder.profileImage.setStrokeWidth(0)
         holder.profileImage.setSolidColor(CircularTextView.colors[rand])
         holder.profileImage.setStrokeColor("#000000")
-        holder.profileImage.text = data.data.posts[position].user_name[0].toString()
+        holder.profileImage.text = data[position].user_name[0].toString()
+    }
+
+    fun addData(data: ArrayList<Post>) {
+        val size = this.data.size
+        this.data.addAll(data)
+        val sizeNew = this.data.size
+        notifyItemRangeChanged(size, sizeNew)
     }
 
     override fun getItemViewType(position: Int): Int {
         return position
     }
 
-    override fun getItemCount() = data.data.posts.size
+    override fun getItemCount() = data.size
 }

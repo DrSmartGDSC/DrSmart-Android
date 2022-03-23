@@ -106,4 +106,5 @@ class PostsViewModel(private val repository: PostRepository) : ViewModel() {
             }
         })
     }
+
 }
