@@ -59,8 +59,8 @@ class UserQuestionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_questions, container, false)
-        myView = view
+        val view: View? = inflater.inflate(R.layout.fragment_questions, container, false)
+        myView = view!!
 
         viewModel = ViewModelProvider(
             this, PostsViewModelFactory(
@@ -88,15 +88,21 @@ class UserQuestionsFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+        initDataLoading()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initDataLoading()
+        myView.noQuestionsView.visibility = View.GONE
+    }
+
+    private fun initDataLoading() {
         pageNum = 1
         isLastPage = false
         isLoading = false
     }
 
-    override fun onResume() {
-        super.onResume()
-        myView.noQuestionsView.visibility = View.GONE
-    }
 
     private fun initView(view: View) {
         view.askQuestion.setOnClickListener {
@@ -284,7 +290,7 @@ class UserQuestionsFragment : Fragment() {
 
     private fun initProfileImage() {
         val rand = (CircularTextView.colors.indices).random()
-        profileImage.setStrokeWidth(0)
+        dialog.profileImage.setStrokeWidth(0)
         dialog.profileImage.setSolidColor(CircularTextView.colors[rand])
         dialog.profileImage.setStrokeColor("#000000")
         dialog.profileImage.text = "Ask"

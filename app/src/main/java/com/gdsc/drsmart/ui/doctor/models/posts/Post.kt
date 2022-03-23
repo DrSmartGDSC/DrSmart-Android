@@ -9,6 +9,7 @@ data class Post(
     val img: String,
     val post_id: Int,
     val title: String,
-    val user_name: String
+    val user_name: String,
+    val user_id: String
 
 ) : Serializable

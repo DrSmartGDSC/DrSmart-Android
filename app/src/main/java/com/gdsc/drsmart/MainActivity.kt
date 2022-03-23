@@ -1,6 +1,8 @@
 package com.gdsc.drsmart
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gdsc.drsmart.databinding.ActivityMainBinding
+import com.gdsc.drsmart.tools.storage.AppReferences
+import com.gdsc.drsmart.ui.register.activities.ChooseRegistrationActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -25,9 +29,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val loginState = intent.getBooleanExtra("login_state", false)
+        if (loginState) {
+            Log.e("login_state", loginState.toString()!!)
+            AppReferences.setLoginState(this, false)
+            AppReferences.setDocLoginState(this, false)
+            reopen()
+        }
         setSupportActionBar(toolbar)
         initNav()
         initViews()
+
+    }
+
+    private fun reopen() {
+        val intent = Intent(this, ChooseRegistrationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        this@MainActivity.finish()
     }
 
     private fun initNav() {
@@ -38,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             setOf(R.id.nav_home, R.id.nav_questions, R.id.nav_logout),
             drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

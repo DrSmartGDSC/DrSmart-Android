@@ -67,9 +67,13 @@ class QuestionAdapter(
     }
 
     private fun initProfileImage(holder: ViewHolder, position: Int) {
-        val rand = (CircularTextView.colors.indices).random()
         holder.profileImage.setStrokeWidth(0)
-        holder.profileImage.setSolidColor(CircularTextView.colors[rand])
+        if (is_user) {
+            holder.profileImage.setSolidColor(CircularTextView.colors[0])
+        } else {
+            holder.profileImage.setSolidColor(CircularTextView.colors[1])
+        }
+
         holder.profileImage.setStrokeColor("#000000")
         holder.profileImage.text = data[position].user_name[0].toString()
     }

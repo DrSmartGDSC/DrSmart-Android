@@ -2,6 +2,7 @@ package com.gdsc.drsmart.ui.register.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.gdsc.drsmart.MainActivity
 import com.gdsc.drsmart.R
@@ -21,8 +22,11 @@ class ChooseRegistrationActivity : AppCompatActivity() {
     private fun checkLoginState() {
         val loginState = intent.getBooleanExtra("login_state", false)
         if (loginState) {
+            Log.e("login_state", loginState.toString()!!)
             AppReferences.setLoginState(this, false)
             AppReferences.setDocLoginState(this, false)
+            reopen()
+            //TODO(Handle backstack)
         }
         if (AppReferences.getDocLoginState(this)) {
             val i = Intent(this, DoctorHomePage::class.java)
@@ -34,6 +38,13 @@ class ChooseRegistrationActivity : AppCompatActivity() {
             startActivity(i)
             finish()
         }
+    }
+
+    private fun reopen() {
+        val intent = Intent(this, ChooseRegistrationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        this@ChooseRegistrationActivity.finish()
     }
 
     private fun initView() {

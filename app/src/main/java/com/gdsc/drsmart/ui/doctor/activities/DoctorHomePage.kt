@@ -58,7 +58,7 @@ class DoctorHomePage : AppCompatActivity() {
         pageNum = 1
         isLastPage = false
         isLoading = false
-        getPosts()
+//        getPosts()
     }
 
     private fun initAdapter() {
@@ -92,7 +92,7 @@ class DoctorHomePage : AppCompatActivity() {
         viewModel.postsResponse.observe(this) {
             if (it.data.posts.isNotEmpty()) {
                 if (pageNum == 1) {
-                    postsAdapter = QuestionAdapter(this, it.data.posts, true)
+                    postsAdapter = QuestionAdapter(this, it.data.posts, false)
                     recycleView.adapter = postsAdapter
                 } else {
                     isLoading = false

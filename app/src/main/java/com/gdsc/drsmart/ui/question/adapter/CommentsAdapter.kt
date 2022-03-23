@@ -2,6 +2,7 @@ package com.gdsc.drsmart.ui.question.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
+import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.tools.utils.Base64Utils
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.comment.Data
 
 
-class CommentsAdapter(var context: Context, var data: Data) :
+class CommentsAdapter(
+    var context: Context,
+    var data: Data,
+    var userId: String,
+    var isUser: Boolean
+) :
     RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -49,9 +56,23 @@ class CommentsAdapter(var context: Context, var data: Data) :
     }
 
     private fun initProfileImage(holder: ViewHolder, position: Int) {
-        val rand = (CircularTextView.colors.indices).random()
+//        val rand = (CircularTextView.colors.indices).random()
         holder.profileImage.setStrokeWidth(0)
-        holder.profileImage.setSolidColor(CircularTextView.colors[rand])
+        // 0 for user 1 for doctor
+        Log.e("amr", "${AppReferences.getUserId(context)}  ${userId}")
+        if (isUser) {
+            if (AppReferences.getUserId(context) == userId) {
+                holder.profileImage.setSolidColor(CircularTextView.colors[0])
+            } else {
+                holder.profileImage.setSolidColor(CircularTextView.colors[1])
+            }
+        } else {
+            if (data.comments[position].user_id.toString() == userId) {
+                holder.profileImage.setSolidColor(CircularTextView.colors[0])
+            } else {
+                holder.profileImage.setSolidColor(CircularTextView.colors[1])
+            }
+        }
         holder.profileImage.setStrokeColor("#000000")
         holder.profileImage.text = data.comments[position].user_name[0].toString()
     }

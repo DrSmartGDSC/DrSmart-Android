@@ -63,7 +63,6 @@ class QuestionActivity : AppCompatActivity() {
     private fun initView() {
         questionData = intent.getSerializableExtra("question") as Post
         isUser = intent.getBooleanExtra("isUser", false)
-        Log.e("isUser", "${isUser} || is answered ${questionData.answered}")
         if (isUser) {
             if (questionData.answered) {
                 endPost.visibility = View.VISIBLE
@@ -175,7 +174,7 @@ class QuestionActivity : AppCompatActivity() {
         viewModel.commentResponse.observe(this) {
             if (it.data.comments.isNotEmpty()) {
                 commentsAdapter =
-                    CommentsAdapter(this, it.data)
+                    CommentsAdapter(this, it.data, questionData.user_id, isUser)
                 commentsRecycleView.adapter = commentsAdapter
                 noCommentView.visibility = View.GONE
             } else {

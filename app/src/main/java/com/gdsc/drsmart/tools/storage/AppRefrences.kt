@@ -27,7 +27,7 @@ object AppReferences {
         editor.apply()
     }
 
-    fun getDocLoginState(context: Activity?): Boolean {
+    fun getDocLoginState(context: Context?): Boolean {
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences("doc_login", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean("doc_login", false)
@@ -55,7 +55,7 @@ object AppReferences {
         editor.apply()
     }
 
-    fun getUserId(context: Activity?): String {
+    fun getUserId(context: Context?): String {
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences("id", Context.MODE_PRIVATE)
         return sharedPreferences.getString("id", "")!!
