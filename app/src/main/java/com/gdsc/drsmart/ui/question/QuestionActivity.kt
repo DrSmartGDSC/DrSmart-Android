@@ -72,7 +72,7 @@ class QuestionActivity : AppCompatActivity() {
             }
             endPost.isEnabled = false
         }
-        Log.e("QuestionID", questionData.post_id.toString())
+        Log.d("QuestionID", questionData.post_id.toString())
         initToolbar()
         descTxtView.text = questionData.desc
         fieldTxt.text = questionData.field

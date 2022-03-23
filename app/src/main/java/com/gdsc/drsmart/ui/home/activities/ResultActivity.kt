@@ -2,12 +2,14 @@ package com.gdsc.drsmart.ui.home.activities
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.gdsc.drsmart.MainActivity
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.ui.home.adapter.ResultAdapter
@@ -26,6 +28,7 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
         initViews()
+        askDoctor()
     }
 
     private fun initViews() {
@@ -55,6 +58,14 @@ class ResultActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun askDoctor() {
+        findDocBtn.setOnClickListener {
+            val i = Intent(this, MainActivity::class.java)
+            i.putExtra("isAsk", true)
+            startActivity(i)
+        }
     }
 
     private fun showDialog(context: Context, txt: String) {

@@ -2,7 +2,9 @@ package com.gdsc.drsmart.ui.home.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
@@ -29,10 +31,29 @@ class ScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_disease)
+
+        initView()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(
+            this, ScanViewModelFactory(
+                ScanRepository(
+                    retrofitService
+                )
+            )
+        )[ScanViewModel::class.java]
+    }
+
+    private fun initView() {
+        // if it's lung i will type = 1
         isLung = intent.getBooleanExtra("isLung", false)
+
         if (isLung) {
             stateImage.setImageResource(R.drawable.lungpic2)
-            constraint.setBackgroundColor(resources.getColor(R.color.purple))
+            constraint.setBackgroundColor(ContextCompat.getColor(this, R.color.purple))
+            scanTitle.text = getString(R.string.show_me_your_x_ray)
         }
         close.setOnClickListener {
             finish()
@@ -44,25 +65,16 @@ class ScanActivity : AppCompatActivity() {
                 }
             )
         }
-        viewModel = ViewModelProvider(
-            this, ScanViewModelFactory(
-                ScanRepository(
-                    retrofitService
-                )
-            )
-        )[ScanViewModel::class.java]
     }
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
-            // use the returned uri
-            val uriContent = result.uriContent
-            val uriFilePath = result.getUriFilePath(this) // optional usage
+            val uriFilePath = result.getUriFilePath(this)
             selectedImage = uriFilePath.toString()
             predict()
         } else {
-            // an error occurred
             val exception = result.error
+            Log.d("cropEx", exception!!.message.toString())
         }
     }
 
@@ -89,16 +101,4 @@ class ScanActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    private fun uploadImage(): RequestBody? {
-        return run {
-            val file = File(selectedImage)
-            RequestBody.create(MediaType.parse("*/*"), file)
-        }
-    }
-
-    private fun createPart(`object`: Any): RequestBody? {
-        return RequestBody.create(MultipartBody.FORM, `object`.toString())
-    }
-
 }

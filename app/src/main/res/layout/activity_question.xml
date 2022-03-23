@@ -183,6 +183,19 @@ dsla dlasdlsadl
                         android:layout_height="wrap_content">
 
                         <include
+                            android:id="@+id/progress"
+                            layout="@layout/progressbar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <include
                             android:id="@+id/noCommentView"
                             layout="@layout/no_comments_view"
                             android:visibility="gone"
@@ -244,16 +257,6 @@ dsla dlasdlsadl
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/commentEditText"
         tools:ignore="ContentDescription" />
-
-    <include
-        android:id="@+id/progress"
-        layout="@layout/progressbar"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
