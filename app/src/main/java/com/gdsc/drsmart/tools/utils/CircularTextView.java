@@ -10,7 +10,7 @@ public class CircularTextView extends androidx.appcompat.widget.AppCompatTextVie
     //    public static String[] colors =
 //            new String[]{"#4285F4", "#DB4437", "#F4B400", "#0F9D58", "#78C257", "#737373", "#F25022", "#7FBA00"};
     public static String[] colors =
-            new String[]{"#4285F4", "0F9D58"};
+            new String[]{"#4285F4", "#0F9D58"};
     int strokeColor, solidColor;
     private float strokeWidth;
 

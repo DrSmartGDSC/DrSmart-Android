@@ -32,7 +32,7 @@
             android:exported="true" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".ui.home.activities.ScanActivity"
             android:exported="true" />
