@@ -50,9 +50,13 @@ class SignUpViewModel(private val repository: RegisterRepository) : ViewModel() 
         response.enqueue(object : Callback<FieldsModel> {
             override fun onResponse(call: Call<FieldsModel>, response: Response<FieldsModel>) {
                 view.visibility = View.GONE
-                fields.value = response.body()
+                if (response.code() == 200) {
+                    fields.value = response.body()
+                } else {
+                    Toast.makeText(ctx, "Error ${response.body()!!.error}", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
-
             override fun onFailure(call: Call<FieldsModel>, t: Throwable) {
                 view.visibility = View.GONE
                 Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()

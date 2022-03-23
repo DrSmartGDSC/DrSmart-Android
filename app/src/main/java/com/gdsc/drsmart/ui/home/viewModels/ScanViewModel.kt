@@ -54,14 +54,12 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
         fieldId: Int,
 
         ) {
-//        view.visibility = View.VISIBLE
         val response = repository.getInfo(auth, id, fieldId)
         response.enqueue(object : Callback<InfoModel> {
             override fun onResponse(
                 call: Call<InfoModel>,
                 response: Response<InfoModel>
             ) {
-//                view.visibility = View.GONE
                 if (response.code() == 200) {
                     infoResponse.value = response.body()
                 } else {

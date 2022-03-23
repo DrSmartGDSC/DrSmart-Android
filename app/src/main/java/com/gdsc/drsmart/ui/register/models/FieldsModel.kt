@@ -1,6 +1,5 @@
 package com.gdsc.drsmart.ui.register.models
 
 data class FieldsModel(
-    val `data`: Data,
-    val status: Boolean
+    val `data`: Data, val status: Boolean, val error: String,
 )

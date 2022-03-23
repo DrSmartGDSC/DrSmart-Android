@@ -67,8 +67,7 @@ class ResultAdapter(
         holder.subItem.visibility = if (expanded) View.VISIBLE else View.GONE
         holder.name.text = data.data.result[position].name
         holder.fullDesc.text = data.data.result[position].name
-        holder.value.text =
-            "${data.data.result[position].confidence.roundToInt()} %"
+        holder.value.text = "${data.data.result[position].confidence.roundToInt()} %"
         holder.progress.apply {
             // Set Progress
             progress = data.data.result[position].confidence.toFloat()

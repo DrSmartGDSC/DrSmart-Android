@@ -20,7 +20,12 @@ class SignInViewModel(private val repository: LoginRepository) : ViewModel() {
         response.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 view.visibility = View.GONE
-                signIn.value = response.body()
+                if (response.code() == 200) {
+                    signIn.value = response.body()
+                } else {
+                    Toast.makeText(ctx, "Error ${response.body()!!.error}", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {

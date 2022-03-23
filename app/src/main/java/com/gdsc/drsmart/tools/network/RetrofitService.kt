@@ -66,12 +66,10 @@ interface RetrofitService {
         @Path("postId") postId: Int
     ): Call<CommentResponse>
 
-
     @Headers(
         "Content-Length: 0",
         "Accept: application/json"
     )
-
     @FormUrlEncoded
     @POST("posts/{postId}/comments")
     fun createComment(
@@ -103,7 +101,6 @@ interface RetrofitService {
         @Field("field_id") field_id: Int
     ): Call<AddPostResponse>
 
-
     @Headers(
         "Content-Length: 0",
         "Accept: application/json"
@@ -117,14 +114,12 @@ interface RetrofitService {
         @Part("field_id") field_id: RequestBody
     ): Call<AddPostResponse>
 
-
     @GET("info")
     fun getInfo(
         @Header("Authorization") auth: String,
         @Query("id") id: Int,
         @Query("type") type: Int
     ): Call<InfoModel>
-
 
     companion object {
         var retrofitService: RetrofitService? = null
@@ -136,7 +131,7 @@ interface RetrofitService {
                 .addInterceptor(interceptor).build() // for loging
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("https://sdd-api.herokuapp.com/")
+                    .baseUrl("https://dr-smart-1.ew.r.appspot.com/")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
