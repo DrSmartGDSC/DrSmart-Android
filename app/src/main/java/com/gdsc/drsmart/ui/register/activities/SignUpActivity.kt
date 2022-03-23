@@ -33,6 +33,8 @@ class SignUpActivity : AppCompatActivity() {
             is_doctor = 1;
             helloMessageTxt.text = getString(R.string.hello_dr)
             initSpinner()
+        } else {
+            helloMessageTxt.text = getString(R.string.create_account)
         }
     }
 
@@ -55,6 +57,7 @@ class SignUpActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
             val fullName = fullNameEditText.text.toString()
 
+            if (!isDoc) field_id = -1 // field id will equal -1 for user
             if (email.isNotEmpty()
                 && password.isNotEmpty() && fullName.isNotEmpty() && field_id != 0
             ) {

@@ -17,7 +17,7 @@ class RegistrationHomeActivity : AppCompatActivity() {
 
         val isDoc = intent.getBooleanExtra("isDoctor", false)
         Log.e("isDoc | Is Logned", "$isDoc || ${AppReferences.getLoginState(this)}")
-
+        backBtn.setOnClickListener { finish() }
         if (isDoc) {
             imageView3.setImageResource(R.drawable.ic_plus)
             imageView3.scaleType = ImageView.ScaleType.CENTER

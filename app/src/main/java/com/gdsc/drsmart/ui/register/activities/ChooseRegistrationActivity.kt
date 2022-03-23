@@ -22,7 +22,7 @@ class ChooseRegistrationActivity : AppCompatActivity() {
     private fun checkLoginState() {
         val loginState = intent.getBooleanExtra("login_state", false)
         if (loginState) {
-            Log.e("login_state", loginState.toString()!!)
+            Log.e("login_state", loginState.toString())
             AppReferences.setLoginState(this, false)
             AppReferences.setDocLoginState(this, false)
             reopen()
@@ -52,13 +52,11 @@ class ChooseRegistrationActivity : AppCompatActivity() {
             val i = Intent(this, RegistrationHomeActivity::class.java)
             i.putExtra("isDoctor", true)
             startActivity(i)
-            finish()
         }
         patientBtn.setOnClickListener {
             val i = Intent(this, RegistrationHomeActivity::class.java)
             i.putExtra("isDoctor", false)
             startActivity(i)
-            finish()
         }
     }
 }
