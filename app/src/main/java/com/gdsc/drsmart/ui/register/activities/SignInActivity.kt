@@ -70,6 +70,7 @@ class SignInActivity : AppCompatActivity() {
                     AppReferences.setLoginState(this, false)
                     startActivity(i)
                 }
+                AppReferences.setUserId(this, it.user.user_id.toString())
 
             } else {
                 Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
