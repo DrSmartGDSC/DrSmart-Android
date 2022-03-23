@@ -50,4 +50,6 @@
     <string name="explain_condition">Explain Your condition ?</string>
     <string name="select_photo">Select photo</string>
     <string name="we_will_send_your_question_to_specialized_doctor">We will send your question to specialized doctor</string>
+    <string name="have_a_question_ask_a_doctor">Have a question ? ask a doctor !</string>
+    <string name="show_me_your_x_ray">Show me your x-ray to find disease</string>
 </resources>
