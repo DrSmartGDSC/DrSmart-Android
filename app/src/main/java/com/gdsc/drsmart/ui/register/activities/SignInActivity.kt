@@ -14,6 +14,7 @@ import com.gdsc.drsmart.ui.register.repo.LoginRepository
 import com.gdsc.drsmart.ui.register.viewModels.SignInViewModel
 import com.gdsc.drsmart.ui.register.viewModels.factory.SignInViewModelFactory
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import java.util.*
 
 lateinit var viewModel: SignInViewModel
 private val retrofitService = RetrofitService.getInstance()
@@ -38,7 +39,7 @@ class SignInActivity : AppCompatActivity() {
         backBtn.setOnClickListener { finish() }
         //handle sign in
         patientBtn.setOnClickListener {
-            val email = emailEditText.text.toString()
+            val email = emailEditText.text.toString().lowercase(Locale.getDefault())
             val password = passwordEditText.text.toString()
 
             if (email.isNotEmpty()
@@ -59,19 +60,17 @@ class SignInActivity : AppCompatActivity() {
             if (it.status) {
                 if (!it.user.is_doctor) {
                     val i = Intent(this, MainActivity::class.java)
-                    AppReferences.setToken(this, "Bearer " + it.token)
                     AppReferences.setLoginState(this, true)
                     AppReferences.setDocLoginState(this, false)
                     startActivity(i)
                 } else {
                     val i = Intent(this, DoctorHomePage::class.java)
-                    AppReferences.setToken(this, "Bearer " + it.token)
                     AppReferences.setDocLoginState(this, true)
                     AppReferences.setLoginState(this, false)
                     startActivity(i)
                 }
                 AppReferences.setUserId(this, it.user.user_id.toString())
-
+                AppReferences.setToken(this, "Bearer " + it.token)
             } else {
                 Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
             }

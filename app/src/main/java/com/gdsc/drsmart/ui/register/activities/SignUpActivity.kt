@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_sign_in.backBtn
 import kotlinx.android.synthetic.main.activity_sign_in.emailEditText
 import kotlinx.android.synthetic.main.activity_sign_in.passwordEditText
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 var isDoc: Boolean = false
 var field_id: Int = 0
@@ -30,7 +32,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         initView()
         if (isDoc) {
-            is_doctor = 1;
+            is_doctor = 1
             helloMessageTxt.text = getString(R.string.hello_dr)
             initSpinner()
         } else {
@@ -53,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
 
         //handle signUp in
         signUp.setOnClickListener {
-            val email = emailEditText.text.toString()
+            val email = emailEditText.text.toString().lowercase(Locale.getDefault())
             val password = passwordEditText.text.toString()
             val fullName = fullNameEditText.text.toString()
 
