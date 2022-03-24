@@ -273,6 +273,7 @@ class UserQuestionsFragment : Fragment() {
                         context,
                         AppReferences.getToken(activity!!), img, desc, fieldId, progress
                     )
+
                 }
                 dialog.sendPost.isEnabled = false
                 getAddPostResponse()

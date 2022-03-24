@@ -9,7 +9,6 @@ object AppTools {
         Glide
             .with(ctx)
             .load(url)
-            .centerCrop()
             .into(view)
     }
 }

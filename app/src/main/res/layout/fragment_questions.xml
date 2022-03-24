@@ -17,6 +17,7 @@
 
 
     <include
+        android:elevation="3dp"
         android:id="@+id/progress"
         layout="@layout/progressbar"
         android:visibility="gone"
