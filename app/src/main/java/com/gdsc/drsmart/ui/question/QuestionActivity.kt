@@ -15,7 +15,7 @@ import com.canhub.cropper.options
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
-import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.adapter.CommentsAdapter
@@ -86,7 +86,7 @@ class QuestionActivity : AppCompatActivity() {
         userNameTxt.text = questionData.user_name
         if (questionData.img != null) {
             postImg.visibility = View.VISIBLE
-            postImg.setImageBitmap(Base64Utils.decodeToBitmap(questionData.img))
+            AppTools.loadImage(this, postImg, questionData.img)
         }
     }
 
@@ -121,11 +121,11 @@ class QuestionActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(true);
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
         supportActionBar!!.title = questionData.desc
         if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true);
-            supportActionBar?.setDisplayShowHomeEnabled(true);
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
         }
     }
 

@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.storage.AppReferences
-import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.comment.Data
 
@@ -47,7 +47,7 @@ class CommentsAdapter(
 
         if (data.comments[position].img != null) {
             holder.image.visibility = View.VISIBLE
-            holder.image.setImageBitmap(Base64Utils.decodeToBitmap(data.comments[position].img))
+            AppTools.loadImage(context, holder.image, data.comments[position].img)
         } else {
             holder.image.visibility = View.GONE
         }

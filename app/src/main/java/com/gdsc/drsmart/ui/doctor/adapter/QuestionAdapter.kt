@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.drsmart.R
-import com.gdsc.drsmart.tools.utils.Base64Utils
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.QuestionActivity
@@ -54,7 +54,7 @@ class QuestionAdapter(
 
         //convert base64 to image
         if (data[position].img != null) {
-            holder.image.setImageBitmap(Base64Utils.decodeToBitmap(data[position].img))
+            AppTools.loadImage(context, holder.image, data[position].img)
         } else {
             holder.image.visibility = View.GONE
         }
@@ -64,6 +64,7 @@ class QuestionAdapter(
             i.putExtra("question", data[position])
             i.putExtra("isUser", is_user)
             context.startActivity(i)
+
         }
         if (isUser) {
             if (data[position].answered) {
