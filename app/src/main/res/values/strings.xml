@@ -55,4 +55,5 @@
     <string name="start_adding_questions">Start add a question by using add + button</string>
     <string name="answered_question">Answered Question !</string>
     <string name="thanks_dr">Thanks dr !</string>
+    <string name="ask">Ask</string>
 </resources>

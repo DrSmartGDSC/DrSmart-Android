@@ -4,6 +4,7 @@ import PaginationScrollListener
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -106,7 +107,7 @@ class UserQuestionsFragment : Fragment() {
 
     private fun initView(view: View) {
         view.askQuestion.setOnClickListener {
-            showDialog(context!!)
+            showDialog(activity!!)
         }
     }
 
@@ -218,7 +219,7 @@ class UserQuestionsFragment : Fragment() {
                 initUploadImage()
             }
         } else {
-            result.error
+            Log.d("crop error", result.error!!.message.toString())
         }
     }
 
@@ -231,10 +232,9 @@ class UserQuestionsFragment : Fragment() {
 
     private fun showDialog(context: Context) {
         dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
-        val window: Window = dialog.window!!
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val window: Window? = dialog.window
+        window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.setContentView(R.layout.ask_question_dialog)
         initSpinner(dialog)
         dialog.selectImage.setOnClickListener {
@@ -273,9 +273,8 @@ class UserQuestionsFragment : Fragment() {
                         context,
                         AppReferences.getToken(context), img, desc, fieldId, progress
                     )
-
                 }
-
+                dialog.hide()
                 getAddPostResponse()
             } else {
                 Toast.makeText(
@@ -293,11 +292,14 @@ class UserQuestionsFragment : Fragment() {
         dialog.profileImage.setStrokeWidth(0)
         dialog.profileImage.setSolidColor(CircularTextView.colors[0])
         dialog.profileImage.setStrokeColor("#000000")
-        dialog.profileImage.text = "Ask"
+        dialog.profileImage.text = getString(R.string.ask)
     }
 
     private fun getAddPostResponse() {
         dialog.sendPost.isEnabled = false
+        imagePath = "null"
+        isUploadImage = false
+        pageNum = 1
         viewModel.addPostResponse.observe(this) {
             if (it.status) {
                 getPosts(myView)
