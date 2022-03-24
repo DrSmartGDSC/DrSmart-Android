@@ -194,7 +194,6 @@ class QuestionActivity : AppCompatActivity() {
 
     private fun createComment() {
         sendComment.setOnClickListener {
-            Log.e("image_path", selectedImagePath)
             if (commentEditText.text.toString().trim().isNotEmpty()) {
                 val text = RequestBody.create(
                     MediaType.parse("multipart/form-data"),
@@ -215,13 +214,17 @@ class QuestionActivity : AppCompatActivity() {
                         questionData.post_id, img, text, progress
                     )
                 }
+                sendComment.isEnabled = false
             }
         }
         viewModel.createCommentResponse.observe(this) {
             if (it.status) {
+                sendComment.isEnabled = true
                 commentEditText.text.clear()
                 getComments()
                 initUploadImage()
+            } else {
+                sendComment.isEnabled = true
             }
         }
     }
