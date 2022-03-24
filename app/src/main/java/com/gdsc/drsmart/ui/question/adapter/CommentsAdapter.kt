@@ -40,6 +40,10 @@ class CommentsAdapter(
         bind(holder, position)
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     @SuppressLint("SetTextI18n")
     private fun bind(holder: ViewHolder, position: Int) {
         holder.desc.text = data.comments[position].text

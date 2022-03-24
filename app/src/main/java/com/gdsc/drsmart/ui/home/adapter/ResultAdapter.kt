@@ -38,6 +38,10 @@ class ResultAdapter(
         fun onClick(id: Int)
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_diagnosed, parent, false)

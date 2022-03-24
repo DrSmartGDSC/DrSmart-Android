@@ -100,5 +100,9 @@ class QuestionAdapter(
         return position
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun getItemCount() = data.size
 }
