@@ -292,7 +292,7 @@ class UserQuestionsFragment : Fragment() {
         dialog.sendPost.isEnabled = false
         imagePath = "null"
         isUploadImage = false
-        pageNum = 1
+        initDataLoading()
         viewModel.addPostResponse.observe(this) {
             if (it.status) {
                 getPosts(myView)

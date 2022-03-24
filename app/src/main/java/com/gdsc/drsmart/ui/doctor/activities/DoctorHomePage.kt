@@ -54,17 +54,19 @@ class DoctorHomePage : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        pageNum = 1
-        isLastPage = false
-        isLoading = false
+        initDataLoading()
     }
 
     override fun onResume() {
         super.onResume()
+        initDataLoading()
+        getPosts()
+    }
+
+    private fun initDataLoading() {
         pageNum = 1
         isLastPage = false
         isLoading = false
-        getPosts()
     }
 
     private fun initAdapter() {
