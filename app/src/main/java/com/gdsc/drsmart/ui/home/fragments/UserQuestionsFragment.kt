@@ -54,7 +54,7 @@ class UserQuestionsFragment : Fragment() {
     lateinit var signUpViewModel: SignUpViewModel
     lateinit var postsAdapter: QuestionAdapter
     private val retrofitService = RetrofitService.getInstance()
-
+    val fields: ArrayList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,6 +80,7 @@ class UserQuestionsFragment : Fragment() {
         )[SignUpViewModel::class.java]
 
         initView(view)
+        getFields()
         initAdapter()
         getPosts(view)
         getResponse(view)
@@ -165,29 +166,25 @@ class UserQuestionsFragment : Fragment() {
         }
     }
 
-    private fun initSpinner(view: Dialog) {
-        signUpViewModel.getFields(context!!, progress)
-        val fields: ArrayList<String> = ArrayList()
+    private fun getFields() {
+        signUpViewModel.getFields(context!!, myView.progress)
         fields.add("Select doctor field")
-        view.fieldsSpinner.setSelection(0)
-        var adapter = ArrayAdapter(
-            context!!,
-            android.R.layout.simple_spinner_dropdown_item, fields
-        )
-        view.fieldsSpinner.adapter = adapter
         signUpViewModel.fields.observe(this, {
             if (it.status) {
                 for (i in it.data.fields) {
                     fields.add(i.name)
                 }
-                adapter = ArrayAdapter(
-                    context!!,
-                    android.R.layout.simple_spinner_dropdown_item, fields
-                )
-                view.fieldsSpinner.adapter = adapter
             }
         })
-        view.fieldsSpinner.onItemSelectedListener = object :
+    }
+
+    private fun initSpinner() {
+        val adapter = ArrayAdapter(
+            context!!,
+            android.R.layout.simple_spinner_dropdown_item, fields
+        )
+        dialog.fieldsSpinner.adapter = adapter
+        dialog.fieldsSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -199,12 +196,9 @@ class UserQuestionsFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-
             }
         }
-
     }
-
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
@@ -236,7 +230,6 @@ class UserQuestionsFragment : Fragment() {
         val window: Window? = dialog.window
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.setContentView(R.layout.ask_question_dialog)
-        initSpinner(dialog)
         dialog.selectImage.setOnClickListener {
             cropImage.launch(
                 options {
@@ -245,7 +238,7 @@ class UserQuestionsFragment : Fragment() {
             )
         }
         dialog.cancelSelect.setOnClickListener { initUploadImage() }
-
+        initSpinner()
         dialog.sendPost.setOnClickListener {
             if (dialog.descEditTxt.text.toString().isNotEmpty() && field_id != 0) {
                 if (!isUploadImage) {
