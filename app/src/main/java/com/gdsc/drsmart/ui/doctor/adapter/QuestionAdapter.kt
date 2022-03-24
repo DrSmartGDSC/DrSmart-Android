@@ -15,7 +15,6 @@ import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.models.posts.Post
 import com.gdsc.drsmart.ui.question.QuestionActivity
-import com.gdsc.drsmart.ui.question.isUser
 
 
 class QuestionAdapter(
@@ -66,7 +65,7 @@ class QuestionAdapter(
             context.startActivity(i)
 
         }
-        if (isUser) {
+        if (is_user) {
             if (data[position].answered) {
                 holder.checkPost.visibility = View.VISIBLE
             }
