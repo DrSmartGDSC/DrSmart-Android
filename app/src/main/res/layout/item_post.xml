@@ -56,13 +56,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profileImage"
                 app:layout_constraintEnd_toStartOf="@+id/checkPost"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
-                app:layout_constraintVertical_bias="0.761"
+                app:layout_constraintVertical_bias="0.6"
                 tools:text="Test" />
 
             <TextView
@@ -118,12 +119,13 @@ dsla dlasdlsadl
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/border_edit_text"
                 android:hint="Type answer..."
-                android:padding="12dp"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/postImg"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="HardcodedText" />
 
 
