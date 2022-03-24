@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.activities.LungActivity
 import com.gdsc.drsmart.ui.home.activities.SkinActivity
-import com.gdsc.drsmart.ui.home.viewModels.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,18 +21,14 @@ class HomeFragment : Fragment() {
 
         view.skinCard.setOnClickListener {
             val i = Intent(context, SkinActivity::class.java)
-            startActivity(i);
+            startActivity(i)
         }
         view.lungCard.setOnClickListener {
             val i = Intent(context, LungActivity::class.java)
-            startActivity(i);
+            startActivity(i)
         }
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-        return view;
+        return view
     }
 
 
