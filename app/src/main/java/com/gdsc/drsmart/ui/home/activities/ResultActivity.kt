@@ -14,11 +14,13 @@ import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.ui.home.adapter.ResultAdapter
 import com.gdsc.drsmart.ui.home.models.PredictResponse
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.android.synthetic.main.activity_result.recycleView
 import kotlinx.android.synthetic.main.ask_question_dialog.*
 import kotlinx.android.synthetic.main.fragment_questions.*
 import kotlinx.android.synthetic.main.more_info_dialog.*
+
 
 private lateinit var dialog: Dialog
 
@@ -51,7 +53,7 @@ class ResultActivity : AppCompatActivity() {
         recycleView.adapter = resultsAdapter
         viewModel.infoResponse.observe(this) {
             if (it.status) {
-                showDialog(this, it.data.result)
+                showBottomSheetDialog(this, it.data.result)
             }
         }
         close.setOnClickListener {
@@ -67,6 +69,15 @@ class ResultActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
+
+    private fun showBottomSheetDialog(context: Context, txt: String) {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.more_info_dialog)
+        bottomSheetDialog.desc.text = txt
+
+        bottomSheetDialog.show()
+    }
+
 
     private fun showDialog(context: Context, txt: String) {
         dialog = Dialog(context)
