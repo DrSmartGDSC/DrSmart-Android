@@ -41,7 +41,7 @@ object AppReferences {
         editor.apply()
     }
 
-    fun getToken(context: Activity?): String {
+    fun getToken(context: Context?): String {
         val sharedPreferences: SharedPreferences =
             context!!.getSharedPreferences("token", Context.MODE_PRIVATE)
         return sharedPreferences.getString("token", "")!!

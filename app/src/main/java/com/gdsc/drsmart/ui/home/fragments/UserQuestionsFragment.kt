@@ -43,9 +43,9 @@ var field_id: Int = 0
 var imagePath: String = "null"
 var isUploadImage: Boolean = false
 lateinit var myView: View
-var pageNum = 1
-var isLastPage: Boolean = false
-var isLoading: Boolean = false
+private var pageNum = 1
+private var isLastPage: Boolean = false
+private var isLoading: Boolean = false
 
 class UserQuestionsFragment : Fragment() {
     private lateinit var dialog: Dialog
@@ -234,7 +234,7 @@ class UserQuestionsFragment : Fragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
         val window: Window = dialog.window!!
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.setContentView(R.layout.ask_question_dialog)
         initSpinner(dialog)
         dialog.selectImage.setOnClickListener {
@@ -271,11 +271,11 @@ class UserQuestionsFragment : Fragment() {
                         )
                     viewModel.addPostWithPhoto(
                         context,
-                        AppReferences.getToken(activity!!), img, desc, fieldId, progress
+                        AppReferences.getToken(context), img, desc, fieldId, progress
                     )
 
                 }
-                dialog.sendPost.isEnabled = false
+
                 getAddPostResponse()
             } else {
                 Toast.makeText(
@@ -290,22 +290,22 @@ class UserQuestionsFragment : Fragment() {
     }
 
     private fun initProfileImage() {
-        val rand = (CircularTextView.colors.indices).random()
         dialog.profileImage.setStrokeWidth(0)
-        dialog.profileImage.setSolidColor(CircularTextView.colors[rand])
+        dialog.profileImage.setSolidColor(CircularTextView.colors[0])
         dialog.profileImage.setStrokeColor("#000000")
         dialog.profileImage.text = "Ask"
     }
 
     private fun getAddPostResponse() {
+        dialog.sendPost.isEnabled = false
         viewModel.addPostResponse.observe(this) {
             if (it.status) {
-                dialog.hide()
                 getPosts(myView)
             } else {
                 Toast.makeText(context!!, getString(R.string.server_error), Toast.LENGTH_SHORT)
                     .show()
             }
+            dialog.hide()
             dialog.sendPost.isEnabled = true
         }
     }

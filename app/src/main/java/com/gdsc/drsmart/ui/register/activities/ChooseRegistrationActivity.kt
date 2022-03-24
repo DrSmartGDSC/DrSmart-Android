@@ -2,7 +2,7 @@ package com.gdsc.drsmart.ui.register.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.gdsc.drsmart.MainActivity
 import com.gdsc.drsmart.R
@@ -22,11 +22,9 @@ class ChooseRegistrationActivity : AppCompatActivity() {
     private fun checkLoginState() {
         val loginState = intent.getBooleanExtra("login_state", false)
         if (loginState) {
-            Log.e("login_state", loginState.toString())
             AppReferences.setLoginState(this, false)
             AppReferences.setDocLoginState(this, false)
             reopen()
-            //TODO(Handle backstack)
         }
         if (AppReferences.getDocLoginState(this)) {
             val i = Intent(this, DoctorHomePage::class.java)
@@ -42,9 +40,16 @@ class ChooseRegistrationActivity : AppCompatActivity() {
 
     private fun reopen() {
         val intent = Intent(this, ChooseRegistrationActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         this@ChooseRegistrationActivity.finish()
+    }
+
+    override fun onKeyDown(keycode: Int, event: KeyEvent?): Boolean {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true)
+        }
+        return super.onKeyDown(keycode, event)
     }
 
     private fun initView() {

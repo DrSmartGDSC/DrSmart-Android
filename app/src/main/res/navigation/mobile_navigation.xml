@@ -9,7 +9,19 @@
         android:id="@+id/nav_home"
         android:name="com.gdsc.drsmart.ui.home.fragments.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <argument
+            android:name="login_state"
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_logout4"
+            app:destination="@id/nav_logout" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_logout5"
+            app:destination="@id/nav_logout" />
+    </fragment>
     <activity
         android:id="@+id/nav_logout"
         android:name="com.gdsc.drsmart.ui.register.activities.ChooseRegistrationActivity"
