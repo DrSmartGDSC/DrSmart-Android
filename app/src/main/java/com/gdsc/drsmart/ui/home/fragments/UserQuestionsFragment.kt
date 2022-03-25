@@ -22,6 +22,7 @@ import com.canhub.cropper.options
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
 import com.gdsc.drsmart.ui.doctor.adapter.QuestionAdapter
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
@@ -125,7 +126,7 @@ class UserQuestionsFragment : Fragment() {
         myView.noQuestionsView.visibility = View.GONE
         viewModel.getPosts(
             context!!, AppReferences.getToken(activity),
-            pageNum, 10, view.progress
+            pageNum, AppTools.questionsLimit, view.progress
         )
     }
 

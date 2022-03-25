@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.ui.doctor.adapter.QuestionAdapter
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
 import com.gdsc.drsmart.ui.doctor.viewModels.PostsViewModel
@@ -92,7 +93,7 @@ class DoctorHomePage : AppCompatActivity() {
     private fun getPosts() {
         viewModel.getPosts(
             this, AppReferences.getToken(this),
-            pageNum, 10, loading
+            pageNum, AppTools.questionsLimit, loading
         )
     }
 

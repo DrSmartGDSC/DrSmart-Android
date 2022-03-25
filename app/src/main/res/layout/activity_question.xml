@@ -188,6 +188,7 @@ dsla dlasdlsadl
                         <include
                             android:id="@+id/progress"
                             layout="@layout/progressbar"
+                            android:elevation="3dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"

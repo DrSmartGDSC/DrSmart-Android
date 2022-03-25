@@ -1,6 +1,5 @@
 package com.gdsc.drsmart
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
@@ -13,7 +12,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.gdsc.drsmart.databinding.ActivityMainBinding
-import com.gdsc.drsmart.ui.register.activities.ChooseRegistrationActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -33,12 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun reopen() {
-        val intent = Intent(this, ChooseRegistrationActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        this@MainActivity.finish()
-    }
 
     private fun initNav() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -48,15 +40,6 @@ class MainActivity : AppCompatActivity() {
             setOf(R.id.nav_home, R.id.nav_questions, R.id.nav_logout),
             drawerLayout
         )
-//        val activityNavigator = ActivityNavigator(this!!)
-//        activityNavigator.navigate(
-//            activityNavigator.createDestination().setIntent(
-//                Intent(
-//                    this!!,
-//                    SecondActivity::class.java
-//                )
-//            ), null, null, null
-//        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
