@@ -63,14 +63,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.nav_logout -> Log.d("amr","yup")
-//        }
-//        binding.drawerLayout.closeDrawer(GravityCompat.START)
-//        return super.onOptionsItemSelected(item)
-//    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
