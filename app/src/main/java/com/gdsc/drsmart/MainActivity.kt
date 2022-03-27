@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initNav()
         initViews()
-
     }
 
 
