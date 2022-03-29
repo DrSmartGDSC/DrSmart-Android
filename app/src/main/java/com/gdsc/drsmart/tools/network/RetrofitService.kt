@@ -1,5 +1,6 @@
 package com.gdsc.drsmart.tools.network
 
+import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.ui.doctor.models.comment.CommentResponse
 import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
 import com.gdsc.drsmart.ui.home.models.InfoModel
@@ -129,9 +130,10 @@ interface RetrofitService {
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(interceptor).build() // for loging
+
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("https://dr-smart-1.ew.r.appspot.com/")
+                    .baseUrl(AppTools.BASEURL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
