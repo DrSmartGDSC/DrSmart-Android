@@ -1,6 +1,7 @@
 package com.gdsc.drsmart.ui.doctor.activities
 
 import PaginationScrollListener
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +24,8 @@ import kotlinx.android.synthetic.main.base_toolbar.*
 
 
 lateinit var viewModel: PostsViewModel
+
+@SuppressLint("StaticFieldLeak")
 lateinit var postsAdapter: QuestionAdapter
 private val retrofitService = RetrofitService.getInstance()
 var pageNum = 1
@@ -33,7 +36,13 @@ class DoctorHomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_home_page)
+        initViewModel()
+        initToolbar()
+        initAdapter()
+        getResponse()
+    }
 
+    private fun initViewModel() {
         viewModel = ViewModelProvider(
             this, PostsViewModelFactory(
                 PostRepository(
@@ -41,12 +50,7 @@ class DoctorHomePage : AppCompatActivity() {
                 )
             )
         )[PostsViewModel::class.java]
-
-        initToolbar()
-        initAdapter()
-        getResponse()
     }
-
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)

@@ -1,6 +1,5 @@
 package com.gdsc.drsmart.ui.doctor.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -42,29 +41,29 @@ class QuestionAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        bind(holder, position)
+        initItem(holder, position)
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun bind(holder: ViewHolder, position: Int) {
+    private fun initItem(holder: ViewHolder, position: Int) {
         holder.desc.text = data[position].desc
         holder.field.text = data[position].field
         holder.name.text = data[position].user_name
 
-        //convert base64 to image
+        loadImage(holder, position)
+        handleOnClick(holder, position)
+        checkAnswerState(holder, position)
+        initProfileImage(holder, position)
+    }
+
+    private fun loadImage(holder: ViewHolder, position: Int) {
         if (data[position].img != null) {
             AppTools.loadImage(context, holder.image, data[position].img)
         } else {
             holder.image.visibility = View.GONE
         }
+    }
 
-        holder.itemView.setOnClickListener {
-            val i = Intent(context, QuestionActivity::class.java)
-            i.putExtra("question", data[position])
-            i.putExtra("isUser", is_user)
-            context.startActivity(i)
-
-        }
+    private fun checkAnswerState(holder: ViewHolder, position: Int) {
         if (is_user) {
             if (data[position].answered) {
                 holder.checkPost.visibility = View.VISIBLE
@@ -78,8 +77,17 @@ class QuestionAdapter(
             }
 
         }
-        initProfileImage(holder, position)
     }
+
+    private fun handleOnClick(holder: ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            val i = Intent(context, QuestionActivity::class.java)
+            i.putExtra("question", data[position])
+            i.putExtra("isUser", is_user)
+            context.startActivity(i)
+        }
+    }
+
 
     private fun initProfileImage(holder: ViewHolder, position: Int) {
         holder.profileImage.setStrokeWidth(0)
