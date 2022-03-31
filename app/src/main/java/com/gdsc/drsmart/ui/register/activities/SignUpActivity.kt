@@ -35,15 +35,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        isDoc = intent.getBooleanExtra("isDoc", false)
-        if (isDoc) {
-            is_doctor = 1
-            helloMessageTxt.text = getString(R.string.hello_dr)
-            initSpinner()
-        } else {
-            helloMessageTxt.text = getString(R.string.create_account)
-        }
-
         viewModel = ViewModelProvider(
             this, SignUpViewModelFactory(
                 RegisterRepository(
@@ -52,6 +43,14 @@ class SignUpActivity : AppCompatActivity() {
             )
         )[SignUpViewModel::class.java]
 
+        isDoc = intent.getBooleanExtra("isDoc", false)
+        if (isDoc) {
+            is_doctor = 1
+            helloMessageTxt.text = getString(R.string.hello_dr)
+            initSpinner()
+        } else {
+            helloMessageTxt.text = getString(R.string.create_account)
+        }
         backBtn.setOnClickListener { finish() }
         helloMessageTxt.text = getString(R.string.hello_dr)
 

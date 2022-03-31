@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.register.models.FieldsModel
 import com.gdsc.drsmart.ui.register.models.LoginResponse
 import com.gdsc.drsmart.ui.register.repo.RegisterRepository
@@ -33,13 +34,21 @@ class SignUpViewModel(private val repository: RegisterRepository) : ViewModel() 
                 if (response.code() == 200) {
                     signUp.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    ctx,
+                    ctx.getString(R.string.we_lost_connection),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }
@@ -53,13 +62,21 @@ class SignUpViewModel(private val repository: RegisterRepository) : ViewModel() 
                 if (response.code() == 200) {
                     fields.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Error ${response.body()!!.error}", Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
+
             override fun onFailure(call: Call<FieldsModel>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    ctx,
+                    ctx.getString(R.string.we_lost_connection),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }

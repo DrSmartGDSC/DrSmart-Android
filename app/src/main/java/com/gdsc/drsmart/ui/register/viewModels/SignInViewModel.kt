@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.register.models.LoginResponse
 import com.gdsc.drsmart.ui.register.repo.LoginRepository
 import retrofit2.Call
@@ -30,7 +31,8 @@ class SignInViewModel(private val repository: LoginRepository) : ViewModel() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Server error ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
