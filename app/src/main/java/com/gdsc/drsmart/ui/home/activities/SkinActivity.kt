@@ -11,13 +11,16 @@ class SkinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_skin)
+        initViews()
+    }
 
+    private fun initViews() {
         backBtn.setOnClickListener {
             finish()
         }
         findOutBtn.setOnClickListener {
             val i = Intent(this, ScanActivity::class.java)
-            startActivity(i);
+            startActivity(i)
         }
     }
 }

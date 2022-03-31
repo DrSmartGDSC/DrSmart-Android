@@ -1,11 +1,7 @@
 package com.gdsc.drsmart.ui.home.activities
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewGroup
-import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -22,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_questions.*
 import kotlinx.android.synthetic.main.more_info_dialog.*
 
 
-private lateinit var dialog: Dialog
+//private lateinit var dialog: Dialog
 
 class ResultActivity : AppCompatActivity() {
     lateinit var resultsAdapter: ResultAdapter
@@ -53,7 +49,7 @@ class ResultActivity : AppCompatActivity() {
         recycleView.adapter = resultsAdapter
         viewModel.infoResponse.observe(this) {
             if (it.status) {
-                showBottomSheetDialog(this, it.data.result)
+                showBottomSheetDialog(it.data.result)
             }
         }
         close.setOnClickListener {
@@ -70,24 +66,22 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun showBottomSheetDialog(context: Context, txt: String) {
+    private fun showBottomSheetDialog(txt: String) {
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(R.layout.more_info_dialog)
         bottomSheetDialog.desc.text = txt
-
         bottomSheetDialog.show()
     }
-
-
-    private fun showDialog(context: Context, txt: String) {
-        dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        val window: Window = dialog.window!!
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialog.setContentView(R.layout.more_info_dialog)
-        dialog.desc.text = txt
-        dialog.show()
-    }
+//
+//    private fun showDialog(context: Context, txt: String) {
+//        dialog = Dialog(context)
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setCancelable(true)
+//        val window: Window = dialog.window!!
+//        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//        dialog.setContentView(R.layout.more_info_dialog)
+//        dialog.desc.text = txt
+//        dialog.show()
+//    }
 
 }

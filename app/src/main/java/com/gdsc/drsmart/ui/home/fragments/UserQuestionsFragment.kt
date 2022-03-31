@@ -1,6 +1,6 @@
 package com.gdsc.drsmart.ui.home.fragments
 
-import PaginationScrollListener
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -24,6 +24,7 @@ import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.tools.utils.CircularTextView
+import com.gdsc.drsmart.tools.utils.PaginationScrollListener
 import com.gdsc.drsmart.ui.doctor.adapter.QuestionAdapter
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
 import com.gdsc.drsmart.ui.doctor.viewModels.PostsViewModel
@@ -44,6 +45,8 @@ import java.io.File
 var field_id: Int = 0
 var imagePath: String = "null"
 var isUploadImage: Boolean = false
+
+@SuppressLint("StaticFieldLeak")
 lateinit var myView: View
 private var pageNum = 1
 private var isLastPage: Boolean = false

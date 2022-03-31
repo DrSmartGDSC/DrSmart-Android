@@ -27,7 +27,6 @@ class HomeFragment : Fragment() {
             val i = Intent(context, LungActivity::class.java)
             startActivity(i)
         }
-
         return view
     }
 

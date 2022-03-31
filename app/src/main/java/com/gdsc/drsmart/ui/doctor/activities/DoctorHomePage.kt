@@ -1,6 +1,5 @@
 package com.gdsc.drsmart.ui.doctor.activities
 
-import PaginationScrollListener
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +13,7 @@ import com.gdsc.drsmart.R
 import com.gdsc.drsmart.tools.network.RetrofitService
 import com.gdsc.drsmart.tools.storage.AppReferences
 import com.gdsc.drsmart.tools.utils.AppTools
+import com.gdsc.drsmart.tools.utils.PaginationScrollListener
 import com.gdsc.drsmart.ui.doctor.adapter.QuestionAdapter
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
 import com.gdsc.drsmart.ui.doctor.viewModels.PostsViewModel

@@ -11,13 +11,17 @@ class LungActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lung)
+        initView()
+    }
+
+    fun initView() {
         backBtn.setOnClickListener {
             finish()
         }
         findOutBtn.setOnClickListener {
             val i = Intent(this, ScanActivity::class.java)
             i.putExtra("isLung", true)
-            startActivity(i);
+            startActivity(i)
         }
     }
 }
