@@ -92,11 +92,14 @@ class ScanActivity : AppCompatActivity() {
             AppReferences.getToken(this),
             body, type, load
         )
-
+        val infoType: Int = if (isLung) 1
+        else {
+            0
+        }
         viewModel.predictResponse.observe(this) {
             val i = Intent(this, ResultActivity::class.java)
             i.putExtra("response", it)
-            i.putExtra("type", isLung)
+            i.putExtra("type", infoType)
             startActivity(i)
             finish()
         }

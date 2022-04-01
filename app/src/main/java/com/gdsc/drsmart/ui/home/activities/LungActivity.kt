@@ -14,7 +14,7 @@ class LungActivity : AppCompatActivity() {
         initView()
     }
 
-    fun initView() {
+    private fun initView() {
         backBtn.setOnClickListener {
             finish()
         }
