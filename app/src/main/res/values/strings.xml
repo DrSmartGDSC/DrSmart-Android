@@ -56,4 +56,5 @@
     <string name="answered_question">Answered Question !</string>
     <string name="thanks_dr">Thanks dr !</string>
     <string name="ask">Ask</string>
+    <string name="we_lost_connection">We lost connection with our servers :(</string>
 </resources>
