@@ -26,7 +26,7 @@ var is_doctor: Int = 0// is doctor == 1 , 0 for user
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var viewModel: SignUpViewModel
-    private val retrofitService = RetrofitService.getInstance()
+    lateinit var retrofitService: RetrofitService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -35,6 +35,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        retrofitService = RetrofitService.getInstance(this)
         viewModel = ViewModelProvider(
             this, SignUpViewModelFactory(
                 RegisterRepository(

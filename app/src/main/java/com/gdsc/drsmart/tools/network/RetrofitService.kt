@@ -1,5 +1,7 @@
 package com.gdsc.drsmart.tools.network
 
+import android.content.Context
+import com.gdsc.drsmart.tools.network.utils.NetworkConnectionInterceptor
 import com.gdsc.drsmart.tools.utils.AppTools
 import com.gdsc.drsmart.ui.doctor.models.comment.CommentResponse
 import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
@@ -124,17 +126,24 @@ interface RetrofitService {
 
     companion object {
         var retrofitService: RetrofitService? = null
-        fun getInstance(): RetrofitService {
+        fun getInstance(context: Context): RetrofitService {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(interceptor).build() // for loging
 
+            val oktHttpClient =
+                OkHttpClient.Builder().addInterceptor(
+                    NetworkConnectionInterceptor(
+                        context
+                    )
+                )
+
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
                     .baseUrl(AppTools.BASEURL)
-                    .client(client)
+                    .client(oktHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 retrofitService = retrofit.create(RetrofitService::class.java)

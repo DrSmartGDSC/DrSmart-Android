@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.home.models.InfoModel
 import com.gdsc.drsmart.ui.home.models.PredictResponse
 import com.gdsc.drsmart.ui.home.repo.ScanRepository
@@ -42,7 +43,8 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
 
             override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -69,7 +71,8 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
 
             override fun onFailure(call: Call<InfoModel>, t: Throwable) {
 //                view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }

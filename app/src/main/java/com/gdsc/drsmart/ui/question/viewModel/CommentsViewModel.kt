@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.doctor.models.comment.CommentResponse
 import com.gdsc.drsmart.ui.question.models.CreateCommentResponse
 import com.gdsc.drsmart.ui.question.models.EndPostResponse
@@ -43,7 +44,8 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
 
             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -73,7 +75,8 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
 
             override fun onFailure(call: Call<CreateCommentResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -103,7 +106,8 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
 
             override fun onFailure(call: Call<CreateCommentResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -132,7 +136,8 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
 
             override fun onFailure(call: Call<EndPostResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }

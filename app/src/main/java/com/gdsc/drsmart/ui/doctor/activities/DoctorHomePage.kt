@@ -27,7 +27,7 @@ lateinit var viewModel: PostsViewModel
 
 @SuppressLint("StaticFieldLeak")
 lateinit var postsAdapter: QuestionAdapter
-private val retrofitService = RetrofitService.getInstance()
+lateinit var retrofitService: RetrofitService
 var pageNum = 1
 var isLastPage: Boolean = false
 var isLoading: Boolean = false
@@ -43,6 +43,7 @@ class DoctorHomePage : AppCompatActivity() {
     }
 
     private fun initViewModel() {
+        retrofitService = RetrofitService.getInstance(this)
         viewModel = ViewModelProvider(
             this, PostsViewModelFactory(
                 PostRepository(

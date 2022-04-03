@@ -18,8 +18,7 @@ import kotlin.math.roundToInt
 class ResultAdapter(
     var context: Context,
     var data: PredictResponse, val moreInfoClick: onMoreInfoClickListner
-) :
-    RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var name: TextView = itemView.findViewById(R.id.name)

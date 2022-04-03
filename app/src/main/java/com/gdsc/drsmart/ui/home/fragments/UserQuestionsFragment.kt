@@ -57,8 +57,8 @@ class UserQuestionsFragment : Fragment() {
     lateinit var viewModel: PostsViewModel
     lateinit var signUpViewModel: SignUpViewModel
     lateinit var postsAdapter: QuestionAdapter
-    private val retrofitService = RetrofitService.getInstance()
-    val fields: ArrayList<String> = ArrayList()
+    lateinit var retrofitService: RetrofitService
+    private val fields: ArrayList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,6 +67,7 @@ class UserQuestionsFragment : Fragment() {
         val view: View? = inflater.inflate(R.layout.fragment_questions, container, false)
         myView = view!!
 
+        retrofitService = RetrofitService.getInstance(context!!)
         viewModel = ViewModelProvider(
             this, PostsViewModelFactory(
                 PostRepository(

@@ -36,7 +36,7 @@ var isUser: Boolean = false
 class QuestionActivity : AppCompatActivity() {
     lateinit var viewModel: CommentsViewModel
     private lateinit var commentsAdapter: CommentsAdapter
-    private val retrofitService = RetrofitService.getInstance()
+    lateinit var retrofitService: RetrofitService
     lateinit var questionData: Post
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +59,7 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
+        retrofitService = RetrofitService.getInstance(this)
         viewModel = ViewModelProvider(
             this, CommentViewModelFactory(
                 CommentRepository(

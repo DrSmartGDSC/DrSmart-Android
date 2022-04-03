@@ -24,7 +24,7 @@ import java.io.File
 
 lateinit var selectedImage: String
 lateinit var viewModel: ScanViewModel
-private val retrofitService = RetrofitService.getInstance()
+lateinit var retrofitService: RetrofitService
 var isLung: Boolean = false
 
 class ScanActivity : AppCompatActivity() {
@@ -37,6 +37,7 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
+        retrofitService = RetrofitService.getInstance(this)
         viewModel = ViewModelProvider(
             this, ScanViewModelFactory(
                 ScanRepository(

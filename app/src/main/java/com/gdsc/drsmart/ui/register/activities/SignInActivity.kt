@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.util.*
 
 lateinit var viewModel: SignInViewModel
-private val retrofitService = RetrofitService.getInstance()
+lateinit var retrofitService: RetrofitService
 
 class SignInActivity : AppCompatActivity() {
 
@@ -28,6 +28,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        retrofitService = RetrofitService.getInstance(this)
         viewModel = ViewModelProvider(
             this, SignInViewModelFactory(
                 LoginRepository(
