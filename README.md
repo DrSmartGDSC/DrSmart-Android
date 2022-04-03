@@ -32,6 +32,6 @@ Please watch the demo video : https://youtu.be/KrM5eEaAhuk
 ## Add your own server to the App
 
 * First you need to use our backend servcies from here : https://github.com/DrSmartGDSC/DrSmart-Backend and upload it to your cloud 
-* Second Change BaseUrl From `Tools->Utils->AppTools and change BASEURL to url domain name`
+* Second Change BaseUrl From `Tools-> Utils-> AppTools and change BASEURL to url domain name`
 
 
