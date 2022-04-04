@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.gdsc.drsmart.R
 import com.gdsc.drsmart.ui.doctor.models.posts.PostsResponse
 import com.gdsc.drsmart.ui.doctor.repo.PostRepository
 import com.gdsc.drsmart.ui.question.models.AddPostResponse
@@ -36,13 +37,19 @@ class PostsViewModel(private val repository: PostRepository) : ViewModel() {
                 if (response.code() == 200) {
                     postsResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<PostsResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -66,13 +73,19 @@ class PostsViewModel(private val repository: PostRepository) : ViewModel() {
                 if (response.code() == 200) {
                     addPostResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<AddPostResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }
@@ -96,13 +109,19 @@ class PostsViewModel(private val repository: PostRepository) : ViewModel() {
                 if (response.code() == 200) {
                     addPostResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<AddPostResponse>, t: Throwable) {
                 view.visibility = View.GONE
-                Toast.makeText(ctx, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, ctx.getString(R.string.we_lost_connection), Toast.LENGTH_LONG)
+                    .show()
             }
         })
     }

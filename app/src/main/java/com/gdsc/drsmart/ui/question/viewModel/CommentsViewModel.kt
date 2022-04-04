@@ -38,7 +38,12 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
                 if (response.code() == 200) {
                     commentResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
@@ -69,7 +74,12 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
                 if (response.code() == 200) {
                     createCommentResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
@@ -100,7 +110,12 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
                 if (response.code() == 200) {
                     createCommentResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
@@ -130,7 +145,12 @@ class CommentsViewModel(private val repository: CommentRepository) : ViewModel()
                 if (response.code() == 200) {
                     endPostResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 

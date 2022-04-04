@@ -37,7 +37,12 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
                 if (response.code() == 200) {
                     predictResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
@@ -65,7 +70,12 @@ class ScanViewModel(private val repository: ScanRepository) : ViewModel() {
                 if (response.code() == 200) {
                     infoResponse.value = response.body()
                 } else {
-                    Toast.makeText(ctx, "Server Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        ctx,
+                        ctx.getString(R.string.we_lost_connection),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
                 }
             }
 
