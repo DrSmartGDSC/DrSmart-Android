@@ -37,5 +37,6 @@ Please watch the demo video : https://youtu.be/KrM5eEaAhuk
 
 * First you need to use our backend servcies from here : https://github.com/DrSmartGDSC/DrSmart-Backend and upload it to your cloud 
 * Second Change BaseUrl From `Tools-> Utils-> AppTools and change BASEURL to url domain name`
+* finally debug or run the app in your android device
 
 
